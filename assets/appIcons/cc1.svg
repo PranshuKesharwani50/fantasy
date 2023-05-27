@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28">
+    <g data-name="Group 22117">
+        <g data-name="Path 27270" style="fill:none">
+            <path d="M14 0A14 14 0 1 1 0 14 14 14 0 0 1 14 0z" style="stroke:none"/>
+            <path d="M14 1a12.915 12.915 0 0 0-9.192 3.808A12.915 12.915 0 0 0 1 14c0 3.472 1.352 6.737 3.808 9.192A12.915 12.915 0 0 0 14 27c3.472 0 6.737-1.352 9.192-3.808A12.915 12.915 0 0 0 27 14c0-3.472-1.352-6.737-3.808-9.192A12.915 12.915 0 0 0 14 1m0-1c7.732 0 14 6.268 14 14s-6.268 14-14 14S0 21.732 0 14 6.268 0 14 0z" style="fill:#8e9193;stroke:none"/>
+        </g>
+        <text transform="translate(14 19)" style="fill:#8e9193;font-size:14px;font-family:EncodeSansCompressed-Medium,Encode Sans;font-weight:500"><tspan x="-3.444" y="0">C</tspan></text>
+    </g>
+</svg>

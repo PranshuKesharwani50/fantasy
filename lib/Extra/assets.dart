@@ -1,0 +1,66 @@
+
+const String appIcon = 'assets/appIcons/appIcon.png'; 
+const String banner = 'assets/Images/banner.webp';
+const String homeButton = 'assets/appIcons/home.svg';
+const String M = 'assets/appIcons/M.svg';
+const String walletHome = 'assets/appIcons/walletHome.svg';
+const String notificationHome = 'assets/appIcons/notificationHome.svg';
+const String notificationUpcoming = 'assets/appIcons/notificationUpcoming.svg';
+const String upgradeApp = 'assets/appIcons/upgradeApp.svg';
+const String myContest = 'assets/appIcons/myContest.svg';
+const String more = 'assets/appIcons/more.svg';
+const String bg1 = 'assets/appIcons/bg1.svg';
+const String login = 'assets/appIcons/login.svg';
+const String goBack = 'assets/appIcons/goBack.svg';
+const String otpDegine = 'assets/appIcons/otpDegine.svg';
+const String otpBg = 'assets/appIcons/otpBg.svg';
+// const String rummyGame = 'assets/appIcons/Group 52.png';
+// const String gotiLudo = 'assets/appIcons/Group 53.png';
+// const String snakeLeader = 'assets/appIcons/Group 51.png';
+// const String classicLudo = 'assets/appIcons/Group 50.png';
+// const String pointLudo = 'assets/appIcons/bjjbbb.png';
+// const String banner1 = 'assets/appIcons/banner1.jpeg';
+// const String fantasy = 'assets/appIcons/fantasy.png';
+
+const String rummyGame = 'assets/appIcons/rummy1.webp';
+const String gotiLudo = 'assets/appIcons/gotiLudo1.webp';
+const String snakeLeader = 'assets/appIcons/snakesLadder1.webp';
+const String classicLudo = 'assets/appIcons/classicLudo1.webp';
+const String pointLudo = 'assets/appIcons/quickLudo1.webp';
+const String banner1 = 'assets/appIcons/banner1.jpeg';
+const String fantasy = 'assets/appIcons/fantasy.png';
+
+const String goBack2 = 'assets/appIcons/goBack2.svg';
+const String createTeamwin = 'assets/appIcons/creatTeamwin.svg';
+const String troppe = 'assets/appIcons/troppe.svg';
+const String filter = 'assets/appIcons/filter.svg';
+const String m2 = 'assets/appIcons/m2.svg';
+const String winPer = 'assets/appIcons/winPer.svg';
+const String check = 'assets/appIcons/check.svg';
+const String first = 'assets/appIcons/first.svg';
+const String tag = 'assets/appIcons/tag.svg';
+const String coin = 'assets/appIcons/coin.svg';
+const String downArrow = 'assets/appIcons/downArrow.svg';
+const String playerProfile = 'assets/appIcons/playerProfile.png';
+const String add = 'assets/appIcons/add.svg';
+const String delete = 'assets/appIcons/delete.svg';
+const String teamPreviewBG = 'assets/appIcons/teamPreviewBg.webp';
+const String cancel = 'assets/appIcons/cancel.svg';
+const String c = 'assets/appIcons/c.svg';
+const String vc = 'assets/appIcons/vc.svg';
+const String headingBg = 'assets/appIcons/headingBG.png';
+const String cc1 = 'assets/appIcons/cc1.svg';
+const String vcc1 = 'assets/appIcons/vcc1.svg';
+const String c1 = 'assets/appIcons/c1.svg';
+const String splash = 'assets/appIcons/splash.png';
+const String myTeamBg = 'assets/appIcons/myTeamBg.webp';
+const String close = 'assets/appIcons/close.svg';
+const String online = 'assets/appIcons/online.svg';
+const String clone = 'assets/appIcons/clone.svg';
+const String edit = 'assets/appIcons/editTeam.svg';
+const String preview = 'assets/appIcons/preview.svg';
+// const String splash = 'assets/appIcons/splash.png';
+// const String splash = 'assets/appIcons/splash.png';
+// const String delete = 'assets/appIcons/delete.svg';
+
+

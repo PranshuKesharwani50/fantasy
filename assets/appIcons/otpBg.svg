@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="356" height="557.999" viewBox="0 0 356 557.999">
+    <defs>
+        <filter id="zkhftf7uqa" x="0" y="0" width="356" height="557.999" filterUnits="userSpaceOnUse">
+            <feOffset dy="3"/>
+            <feGaussianBlur stdDeviation="5" result="blur"/>
+            <feFlood flood-color="#dedede" flood-opacity=".102"/>
+            <feComposite operator="in" in2="blur"/>
+            <feComposite in="SourceGraphic"/>
+        </filter>
+    </defs>
+    <g data-name="Group 33864">
+        <g style="filter:url(#zkhftf7uqa)">
+            <path data-name="Subtraction 1" d="M-782 272h-290a17.883 17.883 0 0 1-12.728-5.272A17.882 17.882 0 0 1-1090 254V144.993c.157 0 .325.007.5.007a17.52 17.52 0 0 0 17.5-17.5 17.52 17.52 0 0 0-17.5-17.5c-.164 0-.332 0-.5.007V-238a17.882 17.882 0 0 1 5.272-12.728A17.883 17.883 0 0 1-1072-256h290a17.883 17.883 0 0 1 12.728 5.272A17.882 17.882 0 0 1-764-238v348.007c-.157 0-.325-.007-.5-.007a17.52 17.52 0 0 0-17.5 17.5 17.52 17.52 0 0 0 17.5 17.5c.164 0 .332 0 .5-.007V254a17.883 17.883 0 0 1-5.272 12.728A17.883 17.883 0 0 1-782 272z" transform="translate(1105 268)" style="fill:#fff"/>
+        </g>
+        <path data-name="Line 1" transform="translate(32.5 396.5)" style="fill:none;stroke:#8e9193;stroke-dasharray:2.5" d="M0 0h290"/>
+    </g>
+</svg>
