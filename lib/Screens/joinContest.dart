@@ -247,9 +247,7 @@ class _joinTeamState extends State<joinTeam> {
         onRefresh: refresh,
         displacement: 30.0,
         triggerMode: RefreshIndicatorTriggerMode.onEdge,
-        child: Consumer<matchContestProvider>(
-          builder: (context , dt , child) {
-            return isLoading==false ?  Container(
+        child: isLoading==false ?  Container(
               child: Column(
                 children: [
                   Container(
@@ -484,10 +482,8 @@ class _joinTeamState extends State<joinTeam> {
                 ]
               ),
             ) : Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-        ),
+          child: CircularProgressIndicator(),
+        )
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: InkWell(
