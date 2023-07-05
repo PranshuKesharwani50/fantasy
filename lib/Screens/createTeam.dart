@@ -892,8 +892,8 @@ class _CreateTeamState extends State<CreateTeam> {
                           match: widget.match!,
                           captain: 0,
                           viceCaptain: 0,
-                          teamA: teamA,
-                          teamB: teamB,
+                          teamA: teamA.toInt(),
+                          teamB: teamB.toInt(),
                         )));
                       },
                       child: Container(

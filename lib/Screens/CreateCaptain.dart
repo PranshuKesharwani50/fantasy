@@ -180,7 +180,7 @@ class _CreateCaptainState extends State<CreateCaptain> {
                   ),
                 ),
                 SizedBox(height: 2,),
-                TimerWidget(mydurStart: widget.match!.timeStampStart!,mydurEnd: widget.match!.timeStampEnd!,startingTime: widget.match!.dateStart!,),
+                TimerWidget(mydurStart: widget.match.timeStampStart!,mydurEnd: widget.match.timeStampEnd!,startingTime: widget.match.dateStart!,),
               ],
             ),
           ],

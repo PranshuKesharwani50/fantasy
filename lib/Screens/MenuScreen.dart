@@ -1,4 +1,4 @@
-// ignore_for_file: file_names, prefer_const_constructors, prefer_const_literals_to_create_immutables, sized_box_for_whitespace
+// ignore_for_file: file_names, prefer_const_constructors, prefer_const_literals_to_create_immutables, sized_box_for_whitespace, unused_import
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -7,6 +7,7 @@ import 'package:playon69/Extra/AppTheme.dart';
 import 'package:playon69/Extra/CommonFunctions.dart';
 import 'package:playon69/Extra/assets.dart';
 import 'package:playon69/Screens/Dashboard.dart';
+import 'package:playon69/Screens/Wallet.dart';
 import 'package:timezone/standalone.dart' as tz;
 
 class MenuScreen extends StatelessWidget {
@@ -47,7 +48,215 @@ class MenuScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Drawer(),
+      drawer: Drawer(
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 15),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                children: [
+                  SizedBox(
+                    height: height(context, 0.07)
+                  ),
+                  Container(
+                    padding: EdgeInsets.symmetric(
+                      vertical: 10,
+                      horizontal: 10
+                    ),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(10)
+                      ),
+                      color: Colors.red,
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            CircleAvatar(
+                              radius: 30,
+                            ),
+                            SizedBox(width: 10,),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Demo',
+                                  style: TextStyle(
+                                    fontFamily: font,
+                                    fontSize: 15,
+                                    color: textColor1
+                                  ),
+                                ),
+                                Text(
+                                  '7000xxx879',
+                                  style: TextStyle(
+                                    fontFamily: font,
+                                    fontSize: 15,
+                                    color: textColor1
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Text('View My Profile',
+                                  style: TextStyle(
+                                    fontFamily: font,
+                                    fontSize: 10,
+                                    color: textColor1
+                                  ),
+                                )
+                              ],
+                            ),
+                          ],
+                        ),
+                        InkWell(
+                          onTap: (){},
+                          child: SvgPicture.asset(drawerGo),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 10,),
+                  Drawerwidget(
+                    icon: wlt, 
+                    title: 'Wallet', 
+                    press: (){
+                      Navigator.of(context).pop();
+                      Navigator.push(context,MaterialPageRoute(builder: (ctx)=> Wallet()));
+                    }
+                  ),
+                  Drawerwidget(
+                    icon: af, 
+                    title: 'Add Fund', 
+                    press: (){}
+                  ),
+                  Drawerwidget(
+                    icon: wf, 
+                    title: 'Withdraw-funds', 
+                    press: (){}
+                  ),
+                  Drawerwidget(
+                    icon: gh, 
+                    title: 'Game History', 
+                    press: (){}
+                  ),
+                  Drawerwidget(
+                    icon: ts, 
+                    title: 'Transaction-History', 
+                    press: (){}
+                  ),
+                  Drawerwidget(
+                    icon: re, 
+                    title: "Refer-earn", 
+                    press: (){}
+                  ),
+                  Drawerwidget(
+                    icon: notification, 
+                    title: 'Notification', 
+                    press: (){}
+                  ),
+                  Drawerwidget(
+                    icon: support, 
+                    title: 'Supports', 
+                    press: (){}
+                  ),
+                  SizedBox(height: 30,),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      InkWell(
+                        onTap: (){},
+                        child: Container(
+                          padding: EdgeInsets.symmetric(
+                            vertical: 15,
+                            horizontal: width(context, 0.2)
+                          ),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(5)
+                            ),
+                            border: Border.all(
+                              width: 1.5,
+                              color: borderColor5
+                            )
+                          ),
+                          child: Row(
+                            children: [
+                              SvgPicture.asset(logout),
+                              SizedBox(width: 10,),
+                              Text('Logout',
+                                style: TextStyle(
+                                  fontFamily: font,
+                                  color: textColor2,
+                                  fontSize: 14
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              Column(
+                children: [
+                  Container(
+                    padding: EdgeInsets.symmetric(
+                      vertical: 10,
+                      horizontal: 20
+                    ),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(5)
+                      ),
+                      border: Border.all(
+                        color: borderColor5,
+                        width: 1.5
+                      )
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        SvgPicture.asset(update),
+                        SizedBox(width: 10,),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('App Update Now',
+                              style: TextStyle(
+                                fontFamily: font,
+                                color: textColor4,
+                                fontSize: 13
+                              ),
+                            ),
+                            SizedBox(height: 5,),
+                            Text('Version 1.0.0',
+                              style: TextStyle(
+                                fontFamily: font,
+                                color: textColor4,
+                                fontSize: 11
+                              ),
+                            )
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 15,
+                  )
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
       appBar: AppBar(
         backgroundColor: appBarColor,
         actions: <Widget>[
@@ -180,6 +389,52 @@ class MenuScreen extends StatelessWidget {
                   ),
                 ),
               ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class Drawerwidget extends StatelessWidget {
+  Drawerwidget({
+    required this.icon,
+    required this.title,
+    required this.press,
+  });
+  String? icon;
+  String? title;
+  Function() press;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: press,
+      child: Container(
+        padding: EdgeInsets.symmetric(
+          vertical: 15
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              children: [
+                SvgPicture.asset(icon!),
+                SizedBox(width: 20,),
+                Text(
+                  title!,
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: textColor2,
+                    fontFamily: font
+                  ),
+                ),
+              ],
+            ),
+            InkWell(
+              onTap: (){},
+              child: SvgPicture.asset(goInside),
             ),
           ],
         ),
