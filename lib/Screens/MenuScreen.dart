@@ -7,7 +7,9 @@ import 'package:playon69/Extra/AppTheme.dart';
 import 'package:playon69/Extra/CommonFunctions.dart';
 import 'package:playon69/Extra/assets.dart';
 import 'package:playon69/Screens/Dashboard.dart';
-import 'package:playon69/Screens/Wallet.dart';
+import 'package:playon69/Screens/DrawerScreen/GameHistory.dart';
+import 'package:playon69/Screens/DrawerScreen/TransactionHistory.dart';
+import 'package:playon69/Screens/DrawerScreen/Wallet.dart';
 import 'package:timezone/standalone.dart' as tz;
 
 class MenuScreen extends StatelessWidget {
@@ -143,12 +145,19 @@ class MenuScreen extends StatelessWidget {
                   Drawerwidget(
                     icon: gh, 
                     title: 'Game History', 
-                    press: (){}
+                    press: (){
+                      Navigator.of(context).pop();
+                      Navigator.push(context,MaterialPageRoute(builder: (ctx)=>
+                          gamehistory()));
+                    }
                   ),
                   Drawerwidget(
                     icon: ts, 
                     title: 'Transaction-History', 
-                    press: (){}
+                    press: (){
+                      Navigator.of(context).pop();
+                      Navigator.push(context,MaterialPageRoute(builder: (ctx)=>
+                      transactionhistory()));}
                   ),
                   Drawerwidget(
                     icon: re, 
