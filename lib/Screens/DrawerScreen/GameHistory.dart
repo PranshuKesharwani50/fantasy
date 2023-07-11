@@ -40,9 +40,9 @@ class _gamehistoryState extends State<gamehistory> {
                   padding: const EdgeInsets.only(left: 10,top: 10,right: 10,bottom: 10),
                   child: Container(
                     decoration: BoxDecoration(
-                      border: Border.all(color: Colors.black),
+                      border: Border.all(color:textColor2),
                       shape: BoxShape.rectangle,
-                      color: Colors.white,
+                      color: textColor1,
                       borderRadius: const BorderRadius.all(
                         Radius.circular(20),
                       ),

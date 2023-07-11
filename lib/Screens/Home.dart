@@ -9,6 +9,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:playon69/Extra/assets.dart';
 import 'package:playon69/Models/MathesModel.dart';
 import 'package:playon69/Providers/MathesProvider.dart';
+import 'package:playon69/Screens/DrawerScreen/Wallet.dart';
 import 'package:playon69/Screens/joinContest.dart';
 import 'package:playon69/apis/apis.dart';
 import 'package:playon69/apis/callApi.dart';
@@ -78,7 +79,10 @@ class _HomeState extends State<Home> {
         actions: [
           InkWell(
             child: SvgPicture.asset(walletHome),
-            onTap: (){},
+            onTap: (){
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => Wallet()));
+            },
           ),
           SizedBox(width: 10,),
           InkWell(
