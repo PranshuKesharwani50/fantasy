@@ -1,4 +1,4 @@
-// ignore_for_file: non_constant_identifier_names, camel_case_types, prefer_typing_uninitialized_variables
+// ignore_for_file: non_constant_identifier_names, camel_case_types, prefer_typing_uninitialized_variables, file_names
 
 class MatchesModel {
   bool? session_expired;
@@ -146,18 +146,29 @@ class upcomingMatchData{
 
 class BannersData{
 
-  String? title;
-  String? url;
-  String? actionType;
-  String? description;
+  String? bannerFor;
+  String? actiontype;
+  String? photo;
+  int? status;
+  String? link;
+  String? viewtype;
 
-  BannersData({this.title,this.url,this.actionType,this.description});
+  BannersData({
+    this.bannerFor,
+    this.actiontype,
+    this.photo,
+    this.status,
+    this.link,
+    this.viewtype,
+  });
 
   BannersData.fromJson(var json){
-    title = json['title'];
-    url = json['url'];
-    actionType = json['actiontype'];
-    description = json['description'];
+    bannerFor = json['banner_for'];
+    actiontype = json['action_type'];
+    photo = json['photo'];
+    status = json['status'];
+    link = json['link'];
+    viewtype = json['view_type'];
   }
 
 }

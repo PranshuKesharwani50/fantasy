@@ -3,3 +3,5 @@
 const String baseUrl = 'https://x-man.playon69.com';
 const String baseApi = baseUrl + '/api/';
 const String baseApiUrl = baseApi + 'v3/';
+
+String? version = '1.0.0';

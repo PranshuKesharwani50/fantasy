@@ -68,10 +68,10 @@ class _verifyaccountState extends State<verifyaccount> {
                       children: [
                         Padding(
                           padding: const EdgeInsets.only(left: 12),
-                          child: Image.asset(
-                            phone,
-                            height: 40,
-                          ),
+                          // child: Image.asset(
+                          //   //phone,
+                          //   //height: 40,
+                          // ),
                         ),
                         const Padding(
                           padding: EdgeInsets.only(left: 15),
@@ -106,10 +106,10 @@ class _verifyaccountState extends State<verifyaccount> {
                       children: [
                         Padding(
                           padding: const EdgeInsets.only(left: 12),
-                          child: Image.asset(
-                            id,
-                            height: 40,
-                          ),
+                          // child: Image.asset(
+                          //   id,
+                          //   height: 40,
+                          // ),
                         ),
                         const Padding(
                           padding: EdgeInsets.only(left: 15),
@@ -171,10 +171,10 @@ class _verifyaccountState extends State<verifyaccount> {
                       children: [
                         Padding(
                           padding: const EdgeInsets.only(left: 12),
-                          child: Image.asset(
-                            bankaccount,
-                            height: 40,
-                          ),
+                          // child: Image.asset(
+                          //   bankaccount,
+                          //   height: 40,
+                          // ),
                         ),
                         const Padding(
                           padding: EdgeInsets.only(left: 15),

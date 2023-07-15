@@ -160,7 +160,7 @@ class _verifydocumentState extends State<verifydocument> {
                 decoration: BoxDecoration(
                     border: Border.all(color: Colors.green)
                 ),
-                child:Center(child: Image.asset(pancard))
+                //child:Center(child: Image.asset(pancard))
               ),
               InkWell(
                 child: Container(

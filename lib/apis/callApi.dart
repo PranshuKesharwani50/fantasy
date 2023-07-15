@@ -9,10 +9,12 @@ import 'package:playon69/Models/availableTeamModel.dart';
 import 'package:playon69/Models/editTeamDetailsModel.dart';
 import 'package:playon69/Models/leaderBoardModel.dart';
 import 'package:playon69/Models/myTeamModel.dart';
+import 'package:playon69/Models/transactionistoryModel.dart';
 import 'package:playon69/Providers/CurrentUserProvider.dart';
 import 'package:playon69/Providers/MathesProvider.dart';
 import 'package:playon69/Providers/myTeamProvider.dart';
 import 'package:playon69/Providers/playersProvider.dart';
+import 'package:playon69/Screens/DrawerScreen/Wallet.dart';
 import 'package:playon69/Screens/MenuScreen.dart';
 import 'package:playon69/apis/apis.dart';
 import 'package:playon69/apis/sharedPreference.dart';
@@ -20,7 +22,9 @@ import 'package:provider/provider.dart';
 
 import '../Models/MatchContest.dart';
 import '../Models/MathesModel.dart';
+import '../Models/MyContestModel.dart';
 import '../Models/playersModel.dart';
+import '../Models/walletModel.dart';
 import '../Providers/MatchContestProvider.dart';
 import '../Providers/newContestStatusProvider.dart';
 
@@ -106,4 +110,22 @@ getLeaderBoard1(BuildContext context, String token,String gameId,String userId,i
   var responce = await getLeaderBoard(token, gameId, userId, contestId);
   LeaderBoardModel priceBreakup = LeaderBoardModel.fromJson(responce);
   return priceBreakup;
+}
+
+getWalletDetails1(BuildContext context, String token,String userId) async{
+  var responce = await getWalletDetails(token,userId,);
+  WalletModel wallet = WalletModel.fromJson(responce);
+  return wallet;
+}
+
+getTransactionModel1(BuildContext context, String token,String userId) async{
+  var responce = await getTransactionModel(token,userId,);
+  TransactionHistoryModel wallet = TransactionHistoryModel.fromJson(responce);
+  return wallet;
+}
+
+getMyContestHistory1(BuildContext context, String token,String userId,String actionType) async{
+  var responce = await getMyContestHistory(token,userId,actionType);
+  MyContestModel data = MyContestModel.fromJson(responce);
+  return data;
 }

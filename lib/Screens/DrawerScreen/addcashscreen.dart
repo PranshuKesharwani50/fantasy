@@ -227,7 +227,7 @@ class _addcashState extends State<addcash> {
                                         right: 30,
                                         top: 20,
                                         bottom: 10),
-                                    child: Image.asset(upi, height: 25),
+                                    //child: Image.asset(upi, height: 25),
                                   ),
                                   Text('Pay Using UPI',
                                       style: TextStyle(
@@ -242,7 +242,7 @@ class _addcashState extends State<addcash> {
                                 Padding(
                                   padding: const EdgeInsets.only(
                                       left: 40, right: 20, top: 20, bottom: 10),
-                                  child: Image.asset(upi, height: 25),
+                                  //child: Image.asset(upi, height: 25),
                                 ),
                                 Text('Credit Card/Debit Card',
                                     style: TextStyle(

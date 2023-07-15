@@ -1,7 +1,15 @@
+// ignore_for_file: prefer_const_constructors, camel_case_types, unused_import, prefer_const_literals_to_create_immutables, use_build_context_synchronously, prefer_is_empty
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:playon69/Extra/AppTheme.dart';
+import 'package:playon69/Extra/CommonFunctions.dart';
 import 'package:playon69/Extra/assets.dart';
+import 'package:playon69/Models/transactionistoryModel.dart';
+import 'package:playon69/apis/apis.dart';
+import 'package:playon69/apis/callApi.dart';
+
+import '../../apis/sharedPreference.dart';
 
 class transactionhistory extends StatefulWidget {
   const transactionhistory({super.key});
@@ -11,220 +19,149 @@ class transactionhistory extends StatefulWidget {
 }
 
 class _gamehistoryState extends State<transactionhistory> {
+
+  TransactionHistoryModel? transactionModel;
+  bool? isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    getTransactions();
+  }
+
+  getTransactions() async{
+    var res = await retrivePref(method: methods.Maps, key: 'currentUser');
+    //res['token']
+    transactionModel = await getTransactionModel1(context, '4112|jnxLaeqCSzKXRstroV5SfnUCkX4RRwwF1UhzPQk5', res['user_data']['user_name']);
+    if(transactionModel!.status==true){
+      setState(() {
+        isLoading = false;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: appBgColor,
+      backgroundColor: appBgColor,
       appBar: AppBar(
-        title: const Text('Transaction History',
-            style: TextStyle(fontSize: 14, fontFamily: font)),
-        //automaticallyImplyLeading: false,
+        title: Text(
+          'Transaction History',
+          style: TextStyle(
+            fontSize: 14,
+            fontFamily: font
+          )
+        ),
         backgroundColor: appBarColor,
         leading: IconButton(
-            onPressed: (){
-              Navigator.pop(context);
-            },
-            icon:ImageIcon(AssetImage(backicon))),
-        titleSpacing: 4,
+          onPressed: (){
+            Navigator.pop(context);
+          },
+        icon:ImageIcon(AssetImage(backicon))),
+        titleSpacing: -4,
       ),
-
-
-      body: Column(
+      body: isLoading==false ? Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 8),
-            child: Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.black),
-                      shape: BoxShape.rectangle,
-                      color: Colors.white,
-                      borderRadius: const BorderRadius.all(
-                        Radius.circular(20),
-                      ),
-                    ),
-                    height: 35,
-                    width: 50,
-                    child: Center(
-                      child: InkWell(
-                        child: const Text(
-                          "All",
-                          style: TextStyle(
-                              fontSize: 13,
-                              fontFamily: font,
-                              color: Colors.black),
-                        ),
-                        onTap: () {
-                          setState(() {});
-                          print("Click event on Container");
-                        },
-                      ),
-                    ),
+          Container(
+            color: appBgColor,
+            height: height(context, 0.1),
+          ),
+          Expanded(
+            child: Container(
+              padding: EdgeInsets.only(
+                top: 10,
+                right: 8,
+                left: 8
+              ),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(30),
+                  topRight: Radius.circular(30)
+                ),
+                color: upComingBg
+              ),
+              child: transactionModel!.transactionHistory!.transaction!.length > 0 ? ListView(
+                children: [
+                  for(int x=0; x<transactionModel!.transactionHistory!.transaction!.length; x++)
+                  transactionTile(transactionModel!.transactionHistory!.transaction![x])
+                ],
+              ) : Center(
+                child: Text('No transactions found!',
+                  style: TextStyle(
+                    fontFamily: font,
+                    fontSize: 13
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.black),
-                        shape: BoxShape.rectangle,
-                        color: Colors.white,
-                        borderRadius: const BorderRadius.all(
-                          Radius.circular(20),
-                        ),
-                      ),
-                      height: 35,
-                      width: 60,
-                      child: Center(
-                        child: InkWell(
-                          child: const Text("Deposit",
-                              style: TextStyle(
-                                  fontSize: 13,
-                                  fontFamily: font,
-                                  color: Colors.black)),
-                          onTap: () {
-                            print('tep on button');
-                          },
-                        ),
-                      )),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.black),
-                      shape: BoxShape.rectangle,
-                      color: Colors.white,
-                      borderRadius: const BorderRadius.all(
-                        Radius.circular(20),
-                      ),
-                    ),
-                    height: 35,
-                    width: 90,
-                    child: Center(
-                        child: InkWell(
-                      child: const Text("Winning Cash",
-                          style: TextStyle(
-                              fontSize: 13,
-                              fontFamily: font,
-                              color: Colors.black)),
-                      onTap: () {
-                        print('onn tap');
-                      },
-                    )),
-                  ),
-                ),
-                Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.black),
-                        shape: BoxShape.rectangle,
-                        color: Colors.white,
-                        borderRadius: const BorderRadius.all(
-                          Radius.circular(20),
-                        ),
-                      ),
-                      height: 35,
-                      width: 80,
-                      child: Center(
-                        child: InkWell(
-                          child: const Text("Withdraw",
-                              style: TextStyle(
-                                  fontSize: 13,
-                                  fontFamily: font,
-                                  color: Colors.black)),
-                          onTap: () {
-                            print('on tap');
-                          },
-                        ),
-                      ),
-                    )),
-              ],
+              ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(top: 5),
-            child: Container(
-              height: 605, width: MediaQuery.of(context).size.width,
-              decoration: const BoxDecoration(
-                shape: BoxShape.rectangle,
-                color: borderColor5,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(25.0),
-                  topRight: Radius.circular(25),
-                  bottomLeft: Radius.zero,
-                  bottomRight: Radius.zero,
+        ],
+      ) : Center(
+        child: CircularProgressIndicator(),
+      ),
+    );
+  }
+
+  Widget transactionTile(Transaction data){
+    return Container(
+      margin: EdgeInsets.all(8),
+      padding: EdgeInsets.all(15),
+      decoration: BoxDecoration(
+        color: tileBgColor,
+        borderRadius: BorderRadius.all(
+          Radius.circular(12)
+        )
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text('${data.paymentType}',
+                style: TextStyle(
+                  fontFamily: font,
+                  fontSize: 13,
+                  color: textColor2
                 ),
               ),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Card(
-                  elevation: 5,
-                  shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(12))),
-                  margin: const EdgeInsets.only(
-                      top: 15, left: 10, right: 10, bottom: 480),
-                  child: Column(
-                    children: [
-                      Row(
-                        children: const [
-                          Padding(
-                            padding: EdgeInsets.only(
-                              left: 10,
-                              top: 10,
-                            ),
-                            child: Text('Fantasy Cricket Challenge Joined Free',
-                                style: TextStyle(
-                                    fontSize: 13,
-                                    fontFamily: font,
-                                    color: Colors.black)),
-                          ),
-                          // Image.asset(),
-                          Padding(
-                            padding: EdgeInsets.only(
-                              left: 100,
-                              top: 10,
-                            ),
-                            child: Text('150',
-                                style: TextStyle(
-                                    fontSize: 13,
-                                    fontFamily: font,
-                                    color: Colors.red)),
-                          ),
-                        ],
-                      ),
-                      const Divider(
-                        thickness: 1,
-                        endIndent: 10,
-                        indent: 10,
-                      ),
-                      const Padding(
-                        padding: EdgeInsets.only(right: 140, top: 3),
-                        child: Text(
-                            'Transaction Id :' " " + 'FA12345X198756AV1',
-                            style: TextStyle(
-                                fontSize: 12,
-                                fontFamily: font,
-                                color: Colors.grey)),
-                      ),
-                      const Padding(
-                        padding: EdgeInsets.only(right: 230, top: 5),
-                        child: Text('15 July,2022,' + '10:30',
-                            style: TextStyle(
-                                fontSize: 11,
-                                fontFamily: font,
-                                color: Colors.grey)),
-                      )
-                    ],
+              Row(
+                children: [
+                  Image.asset(coin,height: 15,),
+                  SizedBox(width: 3,),
+                  Text('${data.amt}',
+                    style: TextStyle(
+                      fontFamily: font,
+                      fontSize: 13,
+                      color: textColor5
+                    ),
                   ),
+                ],
+              ),
+            ],
+          ),
+          Divider(
+            thickness: 1,
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('Transaction Id: ${data.transactionId}',
+                style: TextStyle(
+                  fontFamily: font,
+                  fontSize: 12,
+                  color: textColor4
                 ),
               ),
-              //
-            ),
+              SizedBox(height: 5,),
+              Text('${data.date}',
+                style: TextStyle(
+                  fontFamily: font,
+                  fontSize: 11,
+                  color: textColor4
+                ),
+              ),
+            ],
           )
         ],
       ),

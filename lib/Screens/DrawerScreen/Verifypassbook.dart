@@ -189,7 +189,7 @@ class _verifypassbookState extends State<verifypassbook> {
             decoration: BoxDecoration(
                 border: Border.all(color: Colors.green)
             ),
-            child:Center(child: Image.asset(pancard))
+            //child:Center(child: Image.asset(pancard))
         ),
         InkWell(
           child: Container(

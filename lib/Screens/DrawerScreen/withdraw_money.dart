@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:playon69/Extra/AppTheme.dart';
@@ -120,10 +122,10 @@ class _withdrawState extends State<withdraw> {
                   SizedBox(height: 50, width: 30),
                   Row(
                     children: [
-                      Image.asset(
-                        upi,
-                        height: 25,
-                      ),
+                      // Image.asset(
+                      //   upi,
+                      //   height: 25,
+                      // ),
                       SizedBox(
                         width: 30,
                       ),

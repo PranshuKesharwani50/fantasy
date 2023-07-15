@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="37" height="37" viewBox="0 0 37 37">
+    <g data-name="Group 32599">
+        <g data-name="Group 32595" transform="translate(-28 -203)">
+            <rect data-name="Rectangle 10528" width="37" height="37" rx="6" transform="translate(28 203)" style="fill:#8e9193;opacity:.2"/>
+        </g>
+        <g data-name="Group 32598">
+            <path data-name="Path 65814" d="M226.8 30.152h3.916v.559H226.8z" transform="translate(-213.205 -22.772)" style="fill:#021544"/>
+            <path data-name="Path 65815" d="M331.91 30.152h.559v.559h-.559z" transform="translate(-313.765 -22.772)" style="fill:#021544"/>
+            <path data-name="Path 65816" d="M113.906 5.926V-1.72H97.57v24.43h16.336v-8.616h.522l3.021 2.723v-2.723h1.939V5.926zm-.559-7.086v2.35H98.129v-2.35zM98.129 22.15v-3.059h15.217v3.059zm15.217-3.655H98.129V1.711h15.217v4.215h-10.032v8.168h10.033zm5.52-4.961h-1.976v2.051l-2.238-2.051h-10.779V6.485h14.993z" transform="translate(-89.57 7.72)" style="fill:#021544"/>
+            <path data-name="Path 65817" d="m291.752 240.955.634-.448v.746h.559v-.746l.671.448.3-.448-.746-.559.746-.522-.3-.485-.671.485v-.783h-.559v.783l-.634-.485-.336.485.783.522-.783.559z" transform="translate(-275.024 -222.237)" style="fill:#021544"/>
+            <path data-name="Path 65818" d="m387.382 240.955.634-.448v.746h.56v-.746l.671.448.3-.448-.746-.559.746-.522-.3-.485-.671.485v-.783h-.56v.783l-.634-.485-.336.485.783.522-.783.559z" transform="translate(-366.514 -222.237)" style="fill:#021544"/>
+            <path data-name="Path 65819" d="m483.012 240.955.634-.448v.746h.559v-.746l.671.448.3-.448-.746-.559.746-.522-.3-.485-.671.485v-.783h-.559v.783l-.634-.485-.336.485.783.522-.783.559z" transform="translate(-458.005 -222.237)" style="fill:#021544"/>
+            <path data-name="Path 65820" d="M231.835 493.66h-3.282a.9.9 0 0 0 0 1.79h3.282a.908.908 0 0 0 .9-.9.883.883 0 0 0-.9-.89zm0 1.231h-3.282a.336.336 0 1 1 0-.671h3.282a.336.336 0 1 1 0 .671z" transform="translate(-214.026 -466.214)" style="fill:#021544"/>
+        </g>
+    </g>
+</svg>

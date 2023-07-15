@@ -106,6 +106,7 @@ class _LoginWidgetState extends State<LoginWidget> {
 
   void signUp() async{
     if(email.text.isNotEmpty && name.text.isNotEmpty && password.text.isNotEmpty && email.text.isNotEmpty){
+      showLoadingDailog(context, 'Sending otp please-wait...');
       var data = {
         'email': email.text.trim(),
         'password': password.text.trim(),
@@ -122,8 +123,12 @@ class _LoginWidgetState extends State<LoginWidget> {
         insertPref(method: methods.String, key: 'currentUser', value: json.encode(responce));
         Provider.of<CurrentUserProvider>(context,listen: false).insert(user);
         Fluttertoast.showToast(msg: '${responce['message']}');
-        Navigator.push(context, MaterialPageRoute(builder: (ctx)=>OtpVerification(number: mno.text.trim(),token: responce['token'],)));
+        Future.delayed(Duration(seconds: 1),(){
+          Navigator.of(context).pop();
+          Navigator.push(context, MaterialPageRoute(builder: (ctx)=>OtpVerification(number: mno.text.trim(),token: responce['token'],)));
+        });
       }else{
+        Navigator.of(context).pop();
         Fluttertoast.showToast(msg: '${responce['message']}');
         clear();
       }
@@ -231,7 +236,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                   label: 'Mobile Number',
                   widget: IntlPhoneField(
                     showCountryFlag: false,
-                    disableLengthCheck: true,
+                    //disableLengthCheck: true,
                     showDropdownIcon: false,
                     initialCountryCode: 'IN',
                     decoration: InputDecoration(
@@ -254,6 +259,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                   paddingSize: EdgeInsets.all(10),
                   label: 'Password', 
                   widget: TextField(
+                    obscureText: true,
                     decoration: InputDecoration(
                       border: InputBorder.none,
                       hintText: 'Enter your password',
@@ -341,7 +347,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                   label: 'Mobile Number',
                   widget: IntlPhoneField(
                     showCountryFlag: false,
-                    disableLengthCheck: true,
+                    //disableLengthCheck: true,
                     showDropdownIcon: false,
                     initialCountryCode: 'IN',
                     decoration: InputDecoration(
@@ -370,6 +376,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                       }
                       return null;
                     },
+                    obscureText: true,
                     decoration: InputDecoration(
                       border: InputBorder.none,
                       hintText: 'Enter Email id',
@@ -395,6 +402,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                       }
                       return null;
                     },
+                    obscureText: true,
                     decoration: InputDecoration(
                       border: InputBorder.none,
                       hintText: 'Enter Password',

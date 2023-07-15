@@ -103,7 +103,7 @@ class _JoinContestConfermationState extends State<JoinContestConfermation> {
                       color: textColor5
                     ),
                     ),
-                    SvgPicture.asset(coin)
+                    Image.asset(coin)
                   ],
                 )
               ],
@@ -112,7 +112,7 @@ class _JoinContestConfermationState extends State<JoinContestConfermation> {
               onTap: (){
                 Navigator.of(context).pop();
               },
-              child: SvgPicture.asset(close)
+              child: Image.asset(close)
             ),
           ],
         ),
@@ -129,7 +129,7 @@ class _JoinContestConfermationState extends State<JoinContestConfermation> {
             ),
             Row(
               children: [
-                SvgPicture.asset(coin),
+                Image.asset(coin),
                 Text('$totalFee',
                   style: TextStyle(
                    fontSize: 13,
@@ -154,7 +154,7 @@ class _JoinContestConfermationState extends State<JoinContestConfermation> {
            ),
            Row(
              children: [
-               SvgPicture.asset(coin),
+               Image.asset(coin),
                Text(' - $totalBonus',
                  style: TextStyle(
                    fontSize: 13,
@@ -189,7 +189,7 @@ class _JoinContestConfermationState extends State<JoinContestConfermation> {
             ),
             Row(
               children: [
-                SvgPicture.asset(coin),
+                Image.asset(coin),
                   Text('$totalAmt',
                     style: TextStyle(
                     fontSize: 13,

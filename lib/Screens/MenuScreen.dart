@@ -1,4 +1,4 @@
-// ignore_for_file: file_names, prefer_const_constructors, prefer_const_literals_to_create_immutables, sized_box_for_whitespace, unused_import
+// ignore_for_file: file_names, prefer_const_constructors, prefer_const_literals_to_create_immutables, sized_box_for_whitespace, unused_import, must_be_immutable, use_key_in_widget_constructors
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -8,12 +8,18 @@ import 'package:playon69/Extra/CommonFunctions.dart';
 import 'package:playon69/Extra/assets.dart';
 import 'package:playon69/Screens/Dashboard.dart';
 import 'package:playon69/Screens/DrawerScreen/GameHistory.dart';
+import 'package:playon69/Screens/DrawerScreen/Profile.dart';
 import 'package:playon69/Screens/DrawerScreen/TransactionHistory.dart';
 import 'package:playon69/Screens/DrawerScreen/Wallet.dart';
 import 'package:playon69/Screens/DrawerScreen/addcashscreen.dart';
 import 'package:playon69/Screens/DrawerScreen/refund_policy.dart';
 import 'package:playon69/Screens/DrawerScreen/withdraw_money.dart';
+import 'package:playon69/apis/sharedPreference.dart';
+import 'package:playon69/auth/login.dart';
 import 'package:timezone/standalone.dart' as tz;
+
+import '../Extra/config.dart';
+import 'DrawerScreen/Privacypolicy.dart';
 
 class MenuScreen extends StatelessWidget {
   const MenuScreen({super.key});
@@ -66,61 +72,70 @@ class MenuScreen extends StatelessWidget {
                 Column(
                   children: [
                     SizedBox(height: height(context, 0.07)),
-                    Container(
-                      padding:
-                          EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                        color: Colors.red,
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              CircleAvatar(
-                                radius: 30,
-                              ),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'Demo',
-                                    style: TextStyle(
-                                        fontFamily: font,
-                                        fontSize: 15,
-                                        color: textColor1),
-                                  ),
-                                  Text(
-                                    '7000xxx879',
-                                    style: TextStyle(
-                                        fontFamily: font,
-                                        fontSize: 15,
-                                        color: textColor1),
-                                  ),
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                  Text(
-                                    'View My Profile',
-                                    style: TextStyle(
-                                        fontFamily: font,
-                                        fontSize: 10,
-                                        color: textColor1),
-                                  )
-                                ],
-                              ),
-                            ],
-                          ),
-                          InkWell(
-                            onTap: () {},
-                            child: SvgPicture.asset(drawerGo),
-                          ),
-                        ],
+                    InkWell(
+                      onTap: (){
+                        Navigator.of(context).pop();
+                        Navigator.push(
+                          context, 
+                          MaterialPageRoute(
+                            builder: (
+                              (context) => Profile()
+                            )
+                          )
+                        );
+                      },
+                      child: Container(
+                        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                          color: Colors.red,
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                CircleAvatar(
+                                  radius: 30,
+                                ),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Demo',
+                                      style: TextStyle(
+                                          fontFamily: font,
+                                          fontSize: 15,
+                                          color: textColor1),
+                                    ),
+                                    Text(
+                                      '7000xxx879',
+                                      style: TextStyle(
+                                          fontFamily: font,
+                                          fontSize: 15,
+                                          color: textColor1),
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    Text(
+                                      'View My Profile',
+                                      style: TextStyle(
+                                          fontFamily: font,
+                                          fontSize: 10,
+                                          color: textColor1),
+                                    )
+                                  ],
+                                ),
+                              ],
+                            ),
+                            SvgPicture.asset(drawerGo),
+                          ],
+                        ),
                       ),
                     ),
                     SizedBox(
@@ -177,10 +192,23 @@ class MenuScreen extends StatelessWidget {
                                   builder: (ctx) => transactionhistory()));
                         }),
                     Drawerwidget(
-                        icon: wf, title: 'Change Password', press: () {}),
+                        icon: wf, 
+                        title: 'Change Password', 
+                        press: () {
+
+                        }),
                     Drawerwidget(
-                        icon: support, title: 'Supports', press: () {}),
-                    Drawerwidget(icon: re, title: "Refer-earn", press: () {}),
+                        icon: support, 
+                        title: 'Supports', 
+                        press: () {
+
+                        }),
+                    Drawerwidget(
+                        icon: re, 
+                        title: "Refer-earn", 
+                        press: () {
+
+                        }),
                     Drawerwidget(
                         icon: notification,
                         title: 'Refund Policy',
@@ -199,7 +227,7 @@ class MenuScreen extends StatelessWidget {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (ctx) => gamehistory()));
+                                  builder: (ctx) => PrivacyPolicy()));
                         }),
                     SizedBox(
                       height: 30,
@@ -208,7 +236,10 @@ class MenuScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         InkWell(
-                          onTap: () {},
+                          onTap: () {
+                            removePref(context: context, key: 'currentUser');
+                            Navigator.pushReplacement(context, MaterialPageRoute(builder: (ctx)=> Login()));
+                          },
                           child: Container(
                             padding: EdgeInsets.symmetric(
                                 vertical: 15, horizontal: width(context, 0.2)),
@@ -226,9 +257,10 @@ class MenuScreen extends StatelessWidget {
                                 Text(
                                   'Logout',
                                   style: TextStyle(
-                                      fontFamily: font,
-                                      color: textColor2,
-                                      fontSize: 14),
+                                    fontFamily: font,
+                                    color: textColor2,
+                                    fontSize: 14
+                                  ),
                                 )
                               ],
                             ),
@@ -270,7 +302,7 @@ class MenuScreen extends StatelessWidget {
                                 height: 5,
                               ),
                               Text(
-                                'Version 1.0.0',
+                                'Version $version',
                                 style: TextStyle(
                                     fontFamily: font,
                                     color: textColor4,
@@ -294,6 +326,19 @@ class MenuScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: appBarColor,
         actions: <Widget>[
+          Row(
+            children: [
+              Image.asset(coin,height: 15,),
+              SizedBox(width: 1,),
+              Text('₹500',
+                style: TextStyle(
+                  fontFamily: font,
+                  fontSize: 13
+                ),
+              )
+            ],
+          ),
+          SizedBox(width: 10,),
           InkWell(
             child: SvgPicture.asset(walletHome),
             onTap: () {
@@ -485,7 +530,10 @@ class Drawerwidget extends StatelessWidget {
                 Text(
                   title!,
                   style: TextStyle(
-                      fontSize: 14, color: textColor2, fontFamily: font),
+                    fontSize: 14, 
+                    color: textColor2, 
+                    fontFamily: font
+                  ),
                 ),
               ],
             ),

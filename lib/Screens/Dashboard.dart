@@ -1,8 +1,12 @@
 // ignore_for_file: prefer_const_constructors, file_names, must_be_immutable, avoid_unnecessary_containers
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:playon69/Extra/assets.dart';
+import 'package:playon69/Screens/DrawerScreen/Wallet.dart';
 import 'package:playon69/Screens/Home.dart';
+import 'package:playon69/Screens/More.dart';
+import 'package:playon69/Screens/MyContest.dart';
 import 'package:playon69/customs/BottomBarButtons.dart';
 
 import '../Extra/AppTheme.dart';
@@ -18,15 +22,9 @@ class _DashboardState extends State<Dashboard> {
 
   List<Widget> allScreens = <Widget>[
     Home(),
-    Container(
-      child: Text('Screen 2')
-    ),
-    Container(
-      child: Text('Screen 3')
-    ),
-    Container(
-      child: Text('Screen 4')
-    ),
+    MyContest(),
+    Wallet(),
+    More()
   ];
 
   int _selectedIndex = 0;
@@ -40,6 +38,40 @@ class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      //backgroundColor: appBgColor,
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        backgroundColor: appBarColor,
+        titleSpacing: 10,
+        title: Row(
+          children: [
+            Image.asset(appIcon,height: 40,),
+            SizedBox(width: 5,),
+            Text(
+              'FANTASY',
+              style: TextStyle(
+                color: textColor1,
+                fontFamily: font
+              ),
+            ),
+          ],
+        ),
+        actions: [
+          InkWell(
+            child: SvgPicture.asset(walletHome),
+            onTap: (){
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => Wallet()));
+            },
+          ),
+          SizedBox(width: 10,),
+          InkWell(
+            child: SvgPicture.asset(notificationHome),
+            onTap: (){},
+          ),
+          SizedBox(width: 10,),
+        ],
+      ),
       body: Stack(
         children: [
           allScreens[_selectedIndex],

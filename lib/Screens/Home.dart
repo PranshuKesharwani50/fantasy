@@ -30,11 +30,11 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
 
-  // @override
-  // void initState() {
-  //   getMatches1(context, '');
-  //   super.initState();
-  // }
+  @override
+  void initState() {
+    super.initState();
+    getData();
+  }
 
   getData() async{
     var res = await retrivePref(method: methods.Maps, key: 'currentUser');
@@ -59,39 +59,6 @@ class _HomeState extends State<Home> {
     //print(matches!.responce!.matchData![1].upComingMatches![0].title);
     return Scaffold(
       backgroundColor: appBgColor,
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        backgroundColor: appBarColor,
-        titleSpacing: 10,
-        title: Row(
-          children: [
-            Image.asset(appIcon,height: 40,),
-            SizedBox(width: 5,),
-            Text(
-              'FANTASY',
-              style: TextStyle(
-                color: textColor1,
-                fontFamily: font
-              ),
-            ),
-          ],
-        ),
-        actions: [
-          InkWell(
-            child: SvgPicture.asset(walletHome),
-            onTap: (){
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => Wallet()));
-            },
-          ),
-          SizedBox(width: 10,),
-          InkWell(
-            child: SvgPicture.asset(notificationHome),
-            onTap: (){},
-          ),
-          SizedBox(width: 10,),
-        ],
-      ),
       body: match!=null ?  RefreshIndicator(
         onRefresh: refresh,
         displacement: 30.0,
@@ -120,12 +87,7 @@ class _HomeState extends State<Home> {
                             borderRadius: BorderRadius.all(
                               Radius.circular(10)
                             ),
-                            gradient: LinearGradient(
-                              colors: [
-                                Color(0xFFffd76e),
-                                Color(0xFFf9ab13),
-                              ]
-                            )
+                            gradient: bannerBg
                           ),
                           padding: EdgeInsets.all(3),
                           //decoration: ,
@@ -134,7 +96,7 @@ class _HomeState extends State<Home> {
                             child: CachedNetworkImage(
                                 // height: 40,
                                 // width: 40,
-                                imageUrl: '${e.url}',
+                                imageUrl: '${e.photo}',
                                 fit: BoxFit.fill,
                               ),
                           ),

@@ -47,7 +47,7 @@ class _joinTeamState extends State<joinTeam> {
     var res = await retrivePref(method: methods.Maps, key: 'currentUser');
     matchContest = await getMatchDataById1(context, res['token'], '${widget.match!.matchId!}', res['user_data']['user_name']);
     myTeam = await getMyTeam1(context, res['token'], '${widget.match!.matchId!}', res['user_data']['user_name']);
-    if(myTeam!.status==true && myTeam!.status==true){
+    if(myTeam!.status==true && matchContest!.status==true){
       setState(() {
         isLoading = false;
       });
@@ -1285,7 +1285,7 @@ class _joinTeamState extends State<joinTeam> {
                             ),
                             child: Row(
                               children: [
-                                SvgPicture.asset(coin,height: 12,),
+                                Image.asset(coin,height: 12,),
                                 SizedBox(width: 3,),
                                 Text('₹${contest.entryFees}',
                                   style: TextStyle(

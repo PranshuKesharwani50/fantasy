@@ -23,7 +23,6 @@ getMatches(String token) async{
     headers: {
       'Content-Type':'application/json',
       'Accept': 'application/json',
-      //'Authorization':'Bearer 5297|fhlQD0xGHAPKjc9PtSY1kWYeVnLlipbYOlAkimCQ'
       'Authorization':'Bearer $token'
     }
   );
@@ -187,6 +186,54 @@ getLeaderBoard(String token,String gameId,String userId,int contestId) async{
       'Authorization':'Bearer $token'
     },
     body: json.encode({'match_id' : gameId, 'user_id' : userId, "contest_id" : contestId})
+  );
+  var res = json.decode(responce.body);
+  print(res);
+  return res;
+}
+
+getWalletDetails(String token,String userId) async{
+  var responce = await http.post(
+    Uri.parse(baseApiUrl+'getWallet'),
+    headers: {
+      'Content-Type':'application/json',
+      'Accept': 'application/json',
+      'Authorization':'Bearer $token'
+    },
+    body: json.encode({'user_id' : userId,})
+  );
+  var res = json.decode(responce.body);
+  print(res);
+  return res;
+}
+
+getTransactionModel(String token,String userId) async{
+  var responce = await http.post(
+    Uri.parse(baseApiUrl+'transactionHistory'),
+    headers: {
+      'Content-Type':'application/json',
+      'Accept': 'application/json',
+      'Authorization':'Bearer $token'
+    },
+    body: json.encode({'user_id' : userId,})
+  );
+  var res = json.decode(responce.body);
+  print(res);
+  return res;
+}
+
+getMyContestHistory(String token,String userId,String actionType) async{
+  var responce = await http.post(
+    Uri.parse(baseApiUrl+'getMatchHistory'),
+    headers: {
+      'Content-Type':'application/json',
+      'Accept': 'application/json',
+      'Authorization':'Bearer $token'
+    },
+    body: json.encode({
+      'user_id' : userId,
+      'action_type': actionType
+    })
   );
   var res = json.decode(responce.body);
   print(res);
