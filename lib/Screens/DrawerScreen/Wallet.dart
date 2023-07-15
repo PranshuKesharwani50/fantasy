@@ -6,6 +6,8 @@ import 'package:playon69/Extra/AppTheme.dart';
 import 'package:playon69/Extra/CommonFunctions.dart';
 import 'package:playon69/Extra/assets.dart';
 import 'package:playon69/Models/walletModel.dart';
+import 'package:playon69/Screens/DrawerScreen/addcashscreen.dart';
+import 'package:playon69/Screens/DrawerScreen/withdraw_money.dart';
 import 'package:playon69/apis/callApi.dart';
 import 'package:playon69/customs/CustomButton.dart';
 
@@ -499,7 +501,9 @@ class _WalletState extends State<Wallet> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             InkWell(
-                              onTap: (){},
+                              onTap: (){
+                                Navigator.push(context, MaterialPageRoute(builder: ((context) => addcash())));
+                              },
                               child: Container(
                                 alignment: Alignment.center,
                                 width: width(context, 0.35),
@@ -521,7 +525,9 @@ class _WalletState extends State<Wallet> {
                               ),
                             ),
                             InkWell(
-                              onTap: (){},
+                              onTap: (){
+                                Navigator.push(context, MaterialPageRoute(builder: ((context) => withdraw())));
+                              },
                               child: Container(
                                 alignment: Alignment.center,
                                 width: width(context, 0.35),

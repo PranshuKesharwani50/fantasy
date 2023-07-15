@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:playon69/Extra/AppTheme.dart';
 import 'package:playon69/Extra/assets.dart';
-import 'package:playon69/Screens/DrawerScreen/Wallet.dart';
 
 class withdraw extends StatefulWidget {
   const withdraw({super.key});
@@ -26,8 +25,7 @@ class _withdrawState extends State<withdraw> {
           backgroundColor: appBarColor,
           leading: IconButton(
               onPressed: () {
-                Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => Wallet()));
+                Navigator.of(context).pop();
               },
               icon: const ImageIcon(
                 AssetImage(backicon),

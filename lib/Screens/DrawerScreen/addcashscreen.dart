@@ -22,27 +22,33 @@ class _addcashState extends State<addcash> {
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: const Text('Add Cash',
-            style: TextStyle(fontSize: 14, fontFamily: font)),
+            style: TextStyle(
+              fontSize: 14, 
+              fontFamily: font
+            )
+          ),
         //automaticallyImplyLeading: false,
         backgroundColor: appBarColor,
         leading: IconButton(
-            onPressed: () {
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => Wallet()));
-            },
-            icon: ImageIcon(AssetImage(backicon))),
-        titleSpacing: 4,
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          icon: ImageIcon(AssetImage(backicon))
+        ),
+        titleSpacing: -5,
       ),
       body: Column(
         children: [
           Padding(
             padding: const EdgeInsets.only(top: 20),
             child: Text('Total Available Balance',
-                style: TextStyle(
-                    fontSize: 14,
-                    fontFamily: font,
-                    color: textColor2,
-                    fontWeight: FontWeight.bold)),
+              style: TextStyle(
+                fontSize: 14,
+                fontFamily: font,
+                color: textColor2,
+                fontWeight: FontWeight.bold
+              )
+            ),
           ),
           SizedBox(
             height: 5,
@@ -54,11 +60,13 @@ class _addcashState extends State<addcash> {
               Padding(
                 padding: const EdgeInsets.only(left: 6),
                 child: Text('Rs 100.0',
-                    style: TextStyle(
-                        fontSize: 14,
-                        fontFamily: font,
-                        color: textColor5,
-                        fontWeight: FontWeight.bold)),
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontFamily: font,
+                    color: textColor5,
+                    fontWeight: FontWeight.bold
+                  )
+                ),
               ),
             ],
           ),
