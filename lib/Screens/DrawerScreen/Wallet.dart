@@ -5,7 +5,9 @@ import 'package:flutter_svg/svg.dart';
 import 'package:playon69/Extra/AppTheme.dart';
 import 'package:playon69/Extra/CommonFunctions.dart';
 import 'package:playon69/Extra/assets.dart';
+import 'package:playon69/Models/transactionistoryModel.dart';
 import 'package:playon69/Models/walletModel.dart';
+import 'package:playon69/Screens/DrawerScreen/TransactionHistory.dart';
 import 'package:playon69/Screens/DrawerScreen/addcashscreen.dart';
 import 'package:playon69/Screens/DrawerScreen/withdraw_money.dart';
 import 'package:playon69/apis/callApi.dart';
@@ -395,46 +397,51 @@ class _WalletState extends State<Wallet> {
                                 ],
                               ),
                             ),
-                            Container(
-                              padding: EdgeInsets.all(20),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.only(
-                                  bottomLeft: Radius.circular(10),
-                                  bottomRight: Radius.circular(10)
-                                ),
-                                color: tileBgColor
-                              ),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Row(
-                                    children: [
-                                      SvgPicture.asset(history),
-                                      SizedBox(width: 20,),
-                                      Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          Text('Transaction-History',
-                                            style: TextStyle(
-                                              fontFamily: font,
-                                              fontSize: 13,
-                                              color: textColor6
-                                            ),
-                                          ),
-                                          SizedBox(height: 5,),
-                                          Text('All Transaction History Deposit and Withdraw',
-                                            style: TextStyle(
-                                              fontSize: 11,
-                                              fontFamily: font,
-                                              color: textColor4
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
+                            InkWell(
+                              onTap: (){
+                                Navigator.push(context, MaterialPageRoute(builder: (ctx) => transactionhistory()));
+                              },
+                              child: Container(
+                                padding: EdgeInsets.all(20),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.only(
+                                    bottomLeft: Radius.circular(10),
+                                    bottomRight: Radius.circular(10)
                                   ),
-                                  SvgPicture.asset(goIn)
-                                ],
+                                  color: tileBgColor
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        SvgPicture.asset(history),
+                                        SizedBox(width: 20,),
+                                        Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Text('Transaction-History',
+                                              style: TextStyle(
+                                                fontFamily: font,
+                                                fontSize: 13,
+                                                color: textColor6
+                                              ),
+                                            ),
+                                            SizedBox(height: 5,),
+                                            Text('All Transaction History Deposit and Withdraw',
+                                              style: TextStyle(
+                                                fontSize: 11,
+                                                fontFamily: font,
+                                                color: textColor4
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                    SvgPicture.asset(goIn)
+                                  ],
+                                ),
                               ),
                             ),
                           ],

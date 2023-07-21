@@ -9,6 +9,7 @@ import 'package:playon69/Models/availableTeamModel.dart';
 import 'package:playon69/Models/editTeamDetailsModel.dart';
 import 'package:playon69/Models/leaderBoardModel.dart';
 import 'package:playon69/Models/myTeamModel.dart';
+import 'package:playon69/Models/profileModel.dart';
 import 'package:playon69/Models/transactionistoryModel.dart';
 import 'package:playon69/Providers/CurrentUserProvider.dart';
 import 'package:playon69/Providers/MathesProvider.dart';
@@ -127,5 +128,11 @@ getTransactionModel1(BuildContext context, String token,String userId) async{
 getMyContestHistory1(BuildContext context, String token,String userId,String actionType) async{
   var responce = await getMyContestHistory(token,userId,actionType);
   MyContestModel data = MyContestModel.fromJson(responce);
+  return data;
+}
+
+getProfile1(BuildContext context,String userId) async{
+  var responce = await getProfile(userId);
+  ProfileModel data = ProfileModel.fromJson(responce);
   return data;
 }

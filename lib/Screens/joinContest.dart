@@ -38,18 +38,20 @@ class joinTeam extends StatefulWidget {
 
 class _joinTeamState extends State<joinTeam> {
 
-  MatchContest? matchContest;
-  myTeamModel? myTeam;
+  MatchContest? data;
+  myTeamModel? teamdata;
 
   bool isLoading = true;
 
   getMatchData() async{
     var res = await retrivePref(method: methods.Maps, key: 'currentUser');
-    matchContest = await getMatchDataById1(context, res['token'], '${widget.match!.matchId!}', res['user_data']['user_name']);
-    myTeam = await getMyTeam1(context, res['token'], '${widget.match!.matchId!}', res['user_data']['user_name']);
+    var matchContest = await getMatchDataById1(context, res['token'], '${widget.match!.matchId!}', res['user_data']['user_name']);
+    var myTeam = await getMyTeam1(context, res['token'], '${widget.match!.matchId!}', res['user_data']['user_name']);
     if(myTeam!.status==true && matchContest!.status==true){
       setState(() {
         isLoading = false;
+        data = matchContest;
+        teamdata = myTeam;
       });
     }
   }
@@ -110,8 +112,8 @@ class _joinTeamState extends State<joinTeam> {
         bats: bats, 
         all: alls, 
         bowls: bowls, 
-        captain: int.parse(captain!), 
-        viceCaptain: int.parse(viceCaptain!), 
+        captain: int.parse(captain!).toInt(), 
+        viceCaptain: int.parse(viceCaptain!).toInt(), 
         teamA: teamA, 
         teamB: teamB
         )
@@ -191,8 +193,8 @@ class _joinTeamState extends State<joinTeam> {
   @override
   Widget build(BuildContext context) {
 
-    var data = Provider.of<matchContestProvider>(context).matchInfo;
-    var teamdata = Provider.of<myTeamProvider>(context).teams;
+    //var data = Provider.of<matchContestProvider>(context).matchInfo;
+    //var teamdata = Provider.of<myTeamProvider>(context).teams;
     // var matches = data!.responce!.matchContests!;
 
     return Scaffold(
@@ -304,7 +306,7 @@ class _joinTeamState extends State<joinTeam> {
                               ),
                               CustomButton(
                                 color: index==2 ? buttonBgColor : upComingBg,
-                                label: 'My Teams(${data.responce!.myJoiningTeam!.length})',
+                                label: 'My Teams(${data!.responce!.myJoiningTeam!.length})',
                                 fontColor: index==2 ? textColor1 : textColor4,
                                 fontFamily: font, 
                                 padding: EdgeInsets.symmetric(vertical: 10,horizontal: width(context, 0.05)), 
@@ -327,7 +329,7 @@ class _joinTeamState extends State<joinTeam> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text('All Contests (${data.responce!.matchContests![1].contests!.length})',
+                            Text('All Contests (${data!.responce!.matchContests![1].contests!.length})',
                               style: TextStyle(
                                 fontFamily: font,
                                 fontSize: 14,
@@ -364,62 +366,69 @@ class _joinTeamState extends State<joinTeam> {
                           topRight: Radius.circular(30)
                         )
                       ),
-                      child: Column(
-                        children: [
-                          Expanded(
-                            child: ListView(
-                              children: [
-                                for(int x=0; x<data.responce!.matchContests!.length; x++)
-                                Column(
-                                  children: [
-                                    Row(
-                                      children: [
-                                        SvgPicture.asset(troppe),
-                                        SizedBox(width: 10,),
-                                        Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            Text('${data.responce!.matchContests![x].contestTitle}',
-                                              style: TextStyle(
-                                                color: textColor2,
-                                                fontSize: 15,
-                                                fontFamily: font,
-                                                fontWeight: FontWeight.bold
+                      child: Center(
+                        child: data!.responce!.matchContests!.isNotEmpty ? Column(
+                          children: [
+                            Expanded(
+                              child: ListView(
+                                children: [
+                                  for(int x=0; x<data!.responce!.matchContests!.length; x++)
+                                  Column(
+                                    children: [
+                                      Row(
+                                        children: [
+                                          SvgPicture.asset(troppe),
+                                          SizedBox(width: 10,),
+                                          Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              Text('${data!.responce!.matchContests![x].contestTitle}',
+                                                style: TextStyle(
+                                                  color: textColor2,
+                                                  fontSize: 15,
+                                                  fontFamily: font,
+                                                  fontWeight: FontWeight.bold
+                                                ),
                                               ),
-                                            ),
-                                            SizedBox(height: 2,),
-                                            Text('${data.responce!.matchContests![x].contestSubtitle}',
-                                              style: TextStyle(
-                                                color: textColor4,
-                                                fontSize: 11,
-                                                fontFamily: font,
+                                              SizedBox(height: 2,),
+                                              Text('${data!.responce!.matchContests![x].contestSubtitle}',
+                                                style: TextStyle(
+                                                  color: textColor4,
+                                                  fontSize: 11,
+                                                  fontFamily: font,
+                                                ),
                                               ),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(height: 10,),
-                                    Column(
-                                      children: [
-                                        for(int y=0; y<data.responce!.matchContests![x].contests!.length; y++)
-                                        contestWidget(
-                                          data.responce!.matchContests![x].contests![y],
-                                          data.responce!.myJoiningTeam!.length,
-                                          data.responce!.myJoiningTeam!.isEmpty ? 0 : data.responce!.myJoiningTeam![0].teamId!
-                                        ),
-                                      ],
-                                    ),
-                                    
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 50,
-                                )
-                              ],
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(height: 10,),
+                                      Column(
+                                        children: [
+                                          for(int y=0; y<data!.responce!.matchContests![x].contests!.length; y++)
+                                          contestWidget(
+                                            data!.responce!.matchContests![x].contests![y],
+                                            data!.responce!.myJoiningTeam!.length,
+                                            data!.responce!.myJoiningTeam!.isEmpty ? 0 : data!.responce!.myJoiningTeam![0].teamId!
+                                          ),
+                                        ],
+                                      ),
+                                      
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 50,
+                                  )
+                                ],
+                              )
                             )
-                          )
-                        ],
+                          ],
+                        ) : Text('No Contests Found!',
+                          style: TextStyle(
+                            fontFamily: font,
+                            fontSize: 15
+                          ),
+                        ),
                       ),
                     ),
                   ),
@@ -434,19 +443,26 @@ class _joinTeamState extends State<joinTeam> {
                           topRight: Radius.circular(30)
                         )
                       ),
-                      child: ListView(
-                        children: [
-                          for(int z=0; z<data.responce!.myjoiningContest!.length; z++)
-                          //Container()
-                          Column(
-                            children: [
-                              myContestTile(data.responce!.myjoiningContest![z],),
-                              SizedBox(
-                                height: 50,
-                              )
-                            ],
-                          )
-                        ],
+                      child: Center(
+                        child: data!.responce!.myjoiningContest!.isNotEmpty? ListView(
+                          children: [
+                            for(int z=0; z<data!.responce!.myjoiningContest!.length; z++)
+                            //Container()
+                            Column(
+                              children: [
+                                myContestTile(data!.responce!.myjoiningContest![z],),
+                                SizedBox(
+                                  height: 50,
+                                )
+                              ],
+                            )
+                          ],
+                        ) : Text('No Contests Found!',
+                          style: TextStyle(
+                            fontFamily: font,
+                            fontSize: 15
+                          ),
+                        ),
                       ),
                     )
                   ),
@@ -463,16 +479,23 @@ class _joinTeamState extends State<joinTeam> {
                               topRight: Radius.circular(30)
                             )
                           ),
-                          child: ListView(
-                            children: [
-                              for(int x=0; x<teamdata.response!.team!.length; x++)
-                              //Text('Demo'),
-                              myTeamtile(teamdata.response!.team![x]),
-                              SizedBox(
-                                height: 50,
-                              )
-                            ],
-                          ),
+                          child: Center(
+                            child: teamdata!.response!.team!.isNotEmpty ? ListView(
+                              children: [
+                                for(int x=0; x<teamdata!.response!.team!.length; x++)
+                                //Text('Demo'),
+                                myTeamtile(teamdata!.response!.team![x]),
+                                SizedBox(
+                                  height: 50,
+                                )
+                              ],
+                            ) : Text('No Teams Found!',
+                              style: TextStyle(
+                                fontFamily: font,
+                                fontSize: 15
+                              ),
+                            ),
+                          ) ,
                         )
                       ) : Center(
                         child: CircularProgressIndicator(),

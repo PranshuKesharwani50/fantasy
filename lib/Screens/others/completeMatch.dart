@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 
+import '../../Extra/AppTheme.dart';
 import '../../Models/MyContestModel.dart';
 import '../../apis/callApi.dart';
 import '../../apis/sharedPreference.dart';
@@ -41,11 +42,19 @@ class _CompleteMatchState extends State<CompleteMatch> {
   @override
   Widget build(BuildContext context) {
 
-    return isLoading == false ? ListView(
-      children: [
-        for(int x=0; x< myContests!.responce!.matchData![0].matchModel!.length; x++)
-        MyUpComingMatchesWidget(myContests: myContests!.responce!.matchData![0].matchModel![x],)
-      ],
+    return isLoading == false ? Center(
+      child: myContests!.responce!.matchData==null ? 
+      Text('No Data Found!',
+        style: TextStyle(
+          fontFamily: font,
+          fontSize: 15
+        ), 
+      ) : ListView(
+        children: [
+          for(int x=0; x< myContests!.responce!.matchData![0].matchModel!.length; x++)
+          MyUpComingMatchesWidget(myContests: myContests!.responce!.matchData![0].matchModel![x],)
+        ],
+      ),
     ) : 
     Center(
       child: CircularProgressIndicator(),

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:playon69/Models/MyContestModel.dart';
 import 'package:playon69/widgets/MyUpcomingMatchesWidget.dart';
 
+import '../../Extra/AppTheme.dart';
 import '../../apis/callApi.dart';
 import '../../apis/sharedPreference.dart';
 
@@ -40,11 +41,19 @@ class _UpComingMatchesState extends State<UpComingMatches> {
 
   @override
   Widget build(BuildContext context) {
-    return isLoading == false ? ListView(
-      children: [
-        for(int x=0; x< myContests!.responce!.matchData![0].matchModel!.length; x++)
-        MyUpComingMatchesWidget(),
-      ],
+    return isLoading == false ? Center(
+      child: myContests!.responce!.matchData==null ? 
+      Text('No Data Found!',
+        style: TextStyle(
+          fontFamily: font,
+          fontSize: 15
+        ), 
+      ) : ListView(
+        children: [
+          for(int x=0; x< myContests!.responce!.matchData![0].matchModel!.length; x++)
+          MyUpComingMatchesWidget(),
+        ],
+      )
     ) : 
     Center(
       child: CircularProgressIndicator(),

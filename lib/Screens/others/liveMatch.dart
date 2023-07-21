@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 
+import '../../Extra/AppTheme.dart';
 import '../../Models/MyContestModel.dart';
 import '../../apis/callApi.dart';
 import '../../apis/sharedPreference.dart';
@@ -40,12 +41,19 @@ class _liveMatchState extends State<liveMatch> {
 
   @override
   Widget build(BuildContext context) {
-    return isLoading == false ? ListView(
-      children: [
-        for(int x=0; x< myContests!.responce!.matchData![0].matchModel!.length; x++)
-        MyUpComingMatchesWidget()
-        //upcominMatchWidget('', index)
-      ],
+    return isLoading == false ? Center(
+      child: myContests!.responce!.matchData==null ? 
+      Text('No Data Found!',
+        style: TextStyle(
+          fontFamily: font,
+          fontSize: 15
+        ), 
+      ) : ListView(
+        children: [
+          for(int x=0; x< myContests!.responce!.matchData![0].matchModel!.length; x++)
+          MyUpComingMatchesWidget()
+        ],
+      ),
     ) : 
     Center(
       child: CircularProgressIndicator(),

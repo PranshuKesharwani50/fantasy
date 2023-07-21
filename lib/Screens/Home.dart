@@ -30,6 +30,8 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
 
+  MatchesModel? match;
+
   @override
   void initState() {
     super.initState();
@@ -39,7 +41,12 @@ class _HomeState extends State<Home> {
   getData() async{
     var res = await retrivePref(method: methods.Maps, key: 'currentUser');
     String token = res['token'];
-    getMatches1(context, token);
+    var data = await getMatches1(context, token);
+    if(data.status==true){
+      setState(() {
+        match = data;
+      });
+    }
   }
 
   Future<void> refresh() async{
@@ -54,7 +61,7 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    var match = Provider.of<MatchesProvider>(context).matches;
+    //var match = Provider.of<MatchesProvider>(context).matches;
     var banner = Provider.of<MatchesProvider>(context).banners;
     //print(matches!.responce!.matchData![1].upComingMatches![0].title);
     return Scaffold(
@@ -114,16 +121,23 @@ class _HomeState extends State<Home> {
                           topRight: Radius.circular(30)
                         )
                       ),
-                      child: ListView(
-                        children: [
-                          for(int x=0; x<match.responce!.matchData![1].upComingMatches!.length; x++)
-                          upcominMatchWidget(match.responce!.matchData![1].upComingMatches!,x)
-                        ],
-                        // itemCount: match.responce!.matchData![1].upComingMatches!.length,
-                        // //itemCount: matches!.totalResult,
-                        // itemBuilder: (ctx , index){
-                        //   return upcominMatchWidget(match.responce!.matchData![1].upComingMatches!,index);
-                        // }
+                      child: Center(
+                        child: match!.responce!.matchData![1].upComingMatches!.isNotEmpty ? ListView(
+                          children: [
+                            for(int x=0; x<match!.responce!.matchData![1].upComingMatches!.length; x++)
+                            upcominMatchWidget(match!.responce!.matchData![1].upComingMatches!,x)
+                          ],
+                          // itemCount: match.responce!.matchData![1].upComingMatches!.length,
+                          // //itemCount: matches!.totalResult,
+                          // itemBuilder: (ctx , index){
+                          //   return upcominMatchWidget(match.responce!.matchData![1].upComingMatches!,index);
+                          // }
+                        ) : Text('No Matches Found!',
+                          style: TextStyle(
+                            fontFamily: font,
+                            fontSize: 15
+                          ),
+                        ),
                       ),
                     ),
                   )

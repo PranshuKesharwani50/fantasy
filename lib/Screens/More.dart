@@ -1,79 +1,88 @@
 // ignore_for_file: file_names, prefer_const_constructors, prefer_const_literals_to_create_immutables, must_be_immutable, use_key_in_widget_constructors, avoid_unnecessary_containers
 
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:playon69/Extra/assets.dart';
-import 'package:playon69/Screens/DrawerScreen/Privacypolicy.dart';
 import 'package:playon69/Screens/DrawerScreen/Profile.dart';
+import 'package:playon69/Screens/DrawerScreen/Referandearn.dart';
+import 'package:playon69/Screens/DrawerScreen/support.dart';
 
 import '../Extra/AppTheme.dart';
 import '../Extra/config.dart';
 import '../apis/sharedPreference.dart';
 import '../auth/login.dart';
-import 'DrawerScreen/TermCondition.dart';
+import 'DrawerScreen/Web/webviewScreen.dart';
 
 class More extends StatelessWidget {
   const More({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      padding: EdgeInsets.all(10),
-      child: Column(
+    return Padding(
+      padding: const EdgeInsets.all(10),
+      child: ListView(
         children: [
           Morewidget(
-            icon: logout, 
+            icon: Icons.person, 
             title: 'Profile', 
             press: (){
               Navigator.push(context, MaterialPageRoute(builder: (context) => Profile()));
             }
           ),
           Morewidget(
-            icon: refer, 
+            icon: Icons.share, 
             title: 'Refer & Earn', 
-            press: (){}
+            press: (){
+              Navigator.push(context, MaterialPageRoute(builder: ((context) => referandearn())));
+            }
           ),
           Morewidget(
-            icon: logout, 
+            icon: Icons.info, 
             title: 'About Us', 
-            press: (){}
+            press: (){
+              Navigator.push(context, MaterialPageRoute(builder: ((context) => WebViewScreen(title: 'About Us',endPoint: 'about-us'))));
+            }
           ),
           Morewidget(
-            icon: logout, 
+            icon: Icons.help, 
             title: 'How to Play', 
-            press: (){}
+            press: (){
+              Navigator.push(context, MaterialPageRoute(builder: ((context) => WebViewScreen(title: 'How To Play',endPoint: 'how-to-play'))));
+            }
           ),
           Morewidget(
-            icon: logout, 
+            icon: Icons.leaderboard, 
             title: 'Fantasy Point System', 
             press: (){}
           ),
           Morewidget(
-            icon: logout, 
+            icon: Icons.privacy_tip_rounded, 
             title: 'Privacy Policy', 
             press: (){
-              Navigator.push(context, MaterialPageRoute(builder: ((context) => PrivacyPolicy())));
+              Navigator.push(context, MaterialPageRoute(builder: ((context) => WebViewScreen(title: 'Privacy Policy',endPoint: 'privacy-policy'))));
             }
           ),
           Morewidget(
-            icon: logout, 
+            icon: Icons.receipt_long, 
             title: 'Term & Conditions', 
             press: (){
-              Navigator.push(context, MaterialPageRoute(builder: ((context) => TermCondition())));
+              Navigator.push(context, MaterialPageRoute(builder: ((context) => WebViewScreen(title: 'Term & Conditions',endPoint: 'terms-and-conditions'))));
             }
           ),
           Morewidget(
-            icon: logout, 
-            title: 'Legal', 
-            press: (){}
+            icon: Icons.gavel_rounded, 
+            title: 'Legality', 
+            press: (){
+              Navigator.push(context, MaterialPageRoute(builder: ((context) => WebViewScreen(title: 'Legality',endPoint: 'legalities'))));
+            }
           ),
           Morewidget(
-            icon: logout, 
+            icon: Icons.support_agent, 
             title: 'Contact Us', 
-            press: (){}
+            press: (){
+              Navigator.push(context, MaterialPageRoute(builder: ((context) => Supports())));
+            }
           ),
           Morewidget(
-            icon: logout, 
+            icon: Icons.logout, 
             title: 'Logout', 
             press: (){
               removePref(context: context, key: 'currentUser');
@@ -105,7 +114,7 @@ class Morewidget extends StatelessWidget {
     required this.title,
     required this.press,
   });
-  String? icon;
+  IconData? icon;
   String? title;
   Function() press;
 
@@ -121,7 +130,8 @@ class Morewidget extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  SvgPicture.asset(icon!),
+                  //SvgPicture.asset(icon!),
+                  Icon(icon,color: iconColor6,),
                   SizedBox(
                     width: 10,
                   ),

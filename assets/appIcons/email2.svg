@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="43" height="43" viewBox="0 0 43 43">
+    <defs>
+        <linearGradient id="5h2tfrlnza" x1=".5" x2=".5" y2="1" gradientUnits="objectBoundingBox">
+            <stop offset="0" stop-color="#ff7070"/>
+            <stop offset="1" stop-color="#f82d2e"/>
+        </linearGradient>
+    </defs>
+    <g data-name="Group 32793">
+        <g data-name="Group 31107">
+            <g data-name="Group 31105" transform="translate(-27 -348)">
+                <rect data-name="Rectangle 10531" width="43" height="43" rx="7" transform="translate(27 348)" style="fill:url(#5h2tfrlnza)"/>
+            </g>
+        </g>
+        <g data-name="Group 32798">
+            <path data-name="Path 66124" d="M34.076 243.84v12.715H11.667V243.84" transform="translate(-1.667 -224.146)" style="fill:none;stroke:#fff;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-width:1.2px"/>
+            <path data-name="Path 66125" d="M94.5 23.7V11.667h15.492V23.7" transform="translate(-81.044 -1.667)" style="fill:none;stroke:#fff;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-width:1.2px"/>
+            <path data-name="Path 66126" d="m11.668 243.84 11.2 7.5 11.2-7.5" transform="translate(-1.668 -224.146)" style="fill:none;stroke:#fff;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-width:1.2px"/>
+            <path data-name="Path 66127" d="m465.513 179.672 3.459 2.679" transform="translate(-436.563 -162.657)" style="fill:none;stroke:#fff;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-width:1.2px"/>
+            <path data-name="Path 66128" d="m11.668 182.353 3.459-2.679" transform="translate(-1.668 -162.659)" style="fill:none;stroke:#fff;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;stroke-width:1.2px"/>
+            <path data-name="Path 66129" d="M244.871 51.412a4.983 4.983 0 0 1-2.533.585A4.261 4.261 0 0 1 238 47.515a5.226 5.226 0 0 1 5.212-5.5 3.964 3.964 0 0 1 4.141 4.141c0 2.143-1.218 3.41-2.533 3.41a1.063 1.063 0 0 1-1.072-1.267h-.048a2.275 2.275 0 0 1-2 1.267 1.639 1.639 0 0 1-1.559-1.8 3.419 3.419 0 0 1 3.41-3.41 3.938 3.938 0 0 1 1.51.292l-.487 2.582q-.292 1.608.438 1.608c.731 0 1.559-.974 1.559-2.631a3.26 3.26 0 0 0-3.459-3.508 4.417 4.417 0 0 0-4.335 4.725 3.558 3.558 0 0 0 3.654 3.848 4.8 4.8 0 0 0 2.143-.487zm-.779-6.187a2.372 2.372 0 0 0-.731-.1 2.456 2.456 0 0 0-2.29 2.582c0 .633.292 1.072.926 1.072.828 0 1.608-1.072 1.754-1.949z" transform="translate(-221.474 -30.743)" style="fill:#fff"/>
+        </g>
+    </g>
+</svg>

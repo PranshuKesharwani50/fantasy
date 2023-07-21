@@ -338,22 +338,22 @@ class _PreviewTeamState extends State<PreviewTeam> {
               ),
             ],
           ),
-          if(int.parse(player.pId)==cId || int.parse(player.pId)==vcId)
+          if(int.parse(player.pId.toString())==cId || int.parse(player.pId.toString())==vcId)
           Positioned(
             top: 0,
             left: 0,
             child: Container(
               padding: EdgeInsets.symmetric(
-                horizontal: int.parse(player.pId)==cId ? 7 : 3.5,
+                horizontal: int.parse(player.pId.toString())==cId ? 7 : 3.5,
                 vertical: 4
               ),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(
                   Radius.circular(100)
                 ),
-                color: int.parse(player.pId)==cId ? buttonBgColor : buttonBgColor2
+                color: int.parse(player.pId.toString())==cId ? buttonBgColor : buttonBgColor2
               ),
-              child: Text(int.parse(player.pId)==cId ? 'C' : 'VC',
+              child: Text(int.parse(player.pId.toString())==cId ? 'C' : 'VC',
                 style: TextStyle(
                   color: textColor1,
                   fontSize: 11

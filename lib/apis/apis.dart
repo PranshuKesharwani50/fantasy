@@ -239,3 +239,48 @@ getMyContestHistory(String token,String userId,String actionType) async{
   print(res);
   return res;
 }
+
+getProfile(String userId) async{
+  var responce = await http.post(
+    Uri.parse(baseApiUrl+'getProfile'),
+    body: json.encode({
+      'user_id' : userId,
+    })
+  );
+  var res = json.decode(responce.body);
+  print(res);
+  return res;
+}
+
+updatePr(String token,var data) async{
+  var responce = await http.post(
+    Uri.parse(baseApiUrl+'updateProfile'),
+    headers: {
+      'Content-Type':'application/json',
+      'Accept': 'application/json',
+      'Authorization':'Bearer $token'
+    },
+    body: json.encode(data)
+  );
+  var res = json.decode(responce.body);
+  print(res);
+  return res;
+}
+
+changePass(String token,String cpass,String npass) async{
+  var responce = await http.post(
+    Uri.parse(baseApiUrl+'changePassword'),
+    headers: {
+      'Content-Type':'application/json',
+      'Accept': 'application/json',
+      'Authorization':'Bearer $token'
+    },
+    body: json.encode({
+      "c_password": cpass,
+      "new_password": npass
+    })
+  );
+  var res = json.decode(responce.body);
+  print(res);
+  return res;
+}

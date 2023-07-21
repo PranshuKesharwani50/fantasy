@@ -1,35 +1,43 @@
 // ignore_for_file: file_names, prefer_const_constructors, prefer_const_literals_to_create_immutables, sized_box_for_whitespace, unused_import, must_be_immutable, use_key_in_widget_constructors
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
 import 'package:playon69/Extra/AppTheme.dart';
 import 'package:playon69/Extra/CommonFunctions.dart';
 import 'package:playon69/Extra/assets.dart';
+import 'package:playon69/Models/UserModel.dart';
 import 'package:playon69/Screens/Dashboard.dart';
 import 'package:playon69/Screens/DrawerScreen/GameHistory.dart';
 import 'package:playon69/Screens/DrawerScreen/Profile.dart';
+import 'package:playon69/Screens/DrawerScreen/Referandearn.dart';
 import 'package:playon69/Screens/DrawerScreen/TransactionHistory.dart';
 import 'package:playon69/Screens/DrawerScreen/Wallet.dart';
 import 'package:playon69/Screens/DrawerScreen/addcashscreen.dart';
-import 'package:playon69/Screens/DrawerScreen/refund_policy.dart';
+import 'package:playon69/Screens/DrawerScreen/changepassword.dart';
+import 'package:playon69/Screens/DrawerScreen/support.dart';
 import 'package:playon69/Screens/DrawerScreen/withdraw_money.dart';
 import 'package:playon69/apis/sharedPreference.dart';
 import 'package:playon69/auth/login.dart';
 import 'package:timezone/standalone.dart' as tz;
 
 import '../Extra/config.dart';
-import 'DrawerScreen/Privacypolicy.dart';
+import '../Models/profileModel.dart';
+import '../Models/walletModel.dart';
+import '../apis/callApi.dart';
+import 'DrawerScreen/Web/webviewScreen.dart';
 
-class MenuScreen extends StatelessWidget {
+class MenuScreen extends StatefulWidget {
   const MenuScreen({super.key});
 
-  void convertUTCToIST() async {
-    // Get the current UTC time
-    // DateTime utcTime = DateTime.now().toUtc();
+  @override
+  State<MenuScreen> createState() => _MenuScreenState();
+}
 
-    // print(DateTime.now().millisecondsSinceEpoch);
-    // print(utcTime);
+class _MenuScreenState extends State<MenuScreen> {
+
+  void convertUTCToIST() async {
 
     int utcTimestamp = 1684677600;
     DateTime utcDateTime =
@@ -39,22 +47,42 @@ class MenuScreen extends StatelessWidget {
     String formattedTime = DateFormat('').format(istDateTime);
     print('IST Time: $formattedTime');
 
-    // await tz.initializeTimeZone();
+  }
 
-    // var location = DateTime.now();
+  late LoginResponceModel myProfile;
+  WalletModel? walletModel;
+  String? userId;
 
-    // print('location $location');
+  bool isLoading = true;
 
-    // // Define the IST time zone
-    // final istTimeZone = tz.getLocation('Asia/Calcutta');
+  getUser() async{
+    var res = await retrivePref(method: methods.Maps, key: 'currentUser');
+    userId = res['user_data']['user_name'];
+    setState(() {});
+  }
 
-    // // Convert UTC time to IST
-    // DateTime istTime = tz.TZDateTime.from(utcTime, istTimeZone);
+  @override
+  void initState() {
+    super.initState();
+    getUser();
+    getProfile();
+    getWallet();
+  }
 
-    // // Format the IST time as per your requirement
-    // String formattedISTTime = DateFormat('yyyy-MM-dd HH:mm:ss').format(istTime);
+  void getProfile() async{
+    var res = await retrivePref(method: methods.Maps, key: 'currentUser');
+    myProfile = LoginResponceModel.fromJson(res);
+    setState(() {});
+  }
 
-    // print('IST Time: $formattedISTTime');
+  getWallet() async{
+    var res = await retrivePref(method: methods.Maps, key: 'currentUser');
+    walletModel = await getWalletDetails1(context, res['token'], res['user_data']['user_name']);
+    if(walletModel!.status==true){
+      setState(() {
+        isLoading = false;
+      });
+    }
   }
 
   @override
@@ -88,15 +116,33 @@ class MenuScreen extends StatelessWidget {
                         padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.all(Radius.circular(10)),
-                          color: Colors.red,
+                          color: notificationPanelColor,
                         ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Row(
                               children: [
-                                CircleAvatar(
-                                  radius: 30,
+                                // CircleAvatar(
+                                //   radius: 30,
+                                // ),
+                                Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(100),
+                                    ),
+                                    border: Border.all(
+                                      width: 2,
+                                      color: borderColor
+                                    )
+                                  ),
+                                  child: ClipRRect(
+                                    child: myProfile.userData!.profileImg == null ? Image.asset(profileBg,height: 60,) : 
+                                    CachedNetworkImage(
+                                      imageUrl: '${myProfile.userData!.profileImg}',
+                                      fit: BoxFit.fill,
+                                    )
+                                  ),
                                 ),
                                 SizedBox(
                                   width: 10,
@@ -106,28 +152,31 @@ class MenuScreen extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      'Demo',
+                                      '${myProfile.userData!.name}',
                                       style: TextStyle(
-                                          fontFamily: font,
-                                          fontSize: 15,
-                                          color: textColor1),
+                                        fontFamily: font,
+                                        fontSize: 15,
+                                        color: textColor1
+                                      ),
                                     ),
                                     Text(
-                                      '7000xxx879',
+                                      '${myProfile.userData!.mno}',
                                       style: TextStyle(
-                                          fontFamily: font,
-                                          fontSize: 15,
-                                          color: textColor1),
+                                        fontFamily: font,
+                                        fontSize: 15,
+                                        color: textColor1
+                                      ),
                                     ),
                                     SizedBox(
-                                      height: 10,
+                                      height: 3,
                                     ),
                                     Text(
                                       'View My Profile',
                                       style: TextStyle(
-                                          fontFamily: font,
-                                          fontSize: 10,
-                                          color: textColor1),
+                                        fontFamily: font,
+                                        fontSize: 10,
+                                        color: textColor1
+                                      ),
                                     )
                                   ],
                                 ),
@@ -146,88 +195,77 @@ class MenuScreen extends StatelessWidget {
                         title: 'Wallet',
                         press: () {
                           Navigator.of(context).pop();
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (ctx) => Wallet()));
+                          Navigator.push(context,MaterialPageRoute(builder: (ctx) => Wallet()));
                         }),
                     Drawerwidget(
                         icon: af,
                         title: 'Add Fund',
                         press: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => addcash()));
+                          Navigator.of(context).pop();
+                          Navigator.push(context,MaterialPageRoute(builder: (context) => addcash()));
                         }),
                     Drawerwidget(
                         icon: wf,
                         title: 'Withdraw-funds',
                         press: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => withdraw()));
+                          Navigator.of(context).pop();
+                          Navigator.push(context,MaterialPageRoute(builder: (context) => withdraw()));
                         }),
                     Drawerwidget(
                         icon: wf,
                         title: 'Investment Leaderboard',
-                        press: () {}),
+                        press: () {
+                          Navigator.of(context).pop();
+                          Navigator.push(context,MaterialPageRoute(builder: (ctx) => WebViewScreen(title: 'Investment Leaderboard',endPoint: 'external-invesment-leaderbord/$userId')));
+                        }),
                     Drawerwidget(
                         icon: gh,
                         title: 'Game History',
                         press: () {
                           Navigator.of(context).pop();
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (ctx) => gamehistory()));
+                          Navigator.push(context,MaterialPageRoute(builder: (ctx) => gamehistory()));
                         }),
                     Drawerwidget(
                         icon: ts,
                         title: 'Transaction-History',
                         press: () {
                           Navigator.of(context).pop();
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (ctx) => transactionhistory()));
+                          Navigator.push(context,MaterialPageRoute(builder: (ctx) => transactionhistory()));
                         }),
                     Drawerwidget(
                         icon: wf, 
                         title: 'Change Password', 
                         press: () {
-
+                          Navigator.of(context).pop();
+                          Navigator.push(context,MaterialPageRoute(builder: (ctx) => changepassword()));
                         }),
                     Drawerwidget(
                         icon: support, 
                         title: 'Supports', 
                         press: () {
-
+                          Navigator.of(context).pop();
+                          Navigator.push(context,MaterialPageRoute(builder: (ctx) => Supports()));
                         }),
                     Drawerwidget(
                         icon: re, 
                         title: "Refer-earn", 
                         press: () {
-
+                          Navigator.of(context).pop();
+                          Navigator.push(context,MaterialPageRoute(builder: (ctx) => referandearn()));
                         }),
                     Drawerwidget(
                         icon: notification,
                         title: 'Refund Policy',
                         press: () {
                           Navigator.of(context).pop();
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (ctx) => refund()));
+                          Navigator.push(context,MaterialPageRoute(builder: (ctx) => WebViewScreen(title: 'Refund Policy',endPoint: 'refund-cancellation',)));
                         }),
                     Drawerwidget(
                         icon: notification,
                         title: 'Privacy Policy',
                         press: () {
                           Navigator.of(context).pop();
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (ctx) => PrivacyPolicy()));
+                          Navigator.push(context,MaterialPageRoute(builder: (ctx) => WebViewScreen(title: 'Privacy Policy',endPoint: 'privacy-policy')));
                         }),
                     SizedBox(
                       height: 30,
@@ -330,7 +368,7 @@ class MenuScreen extends StatelessWidget {
             children: [
               Image.asset(coin,height: 15,),
               SizedBox(width: 1,),
-              Text('₹500',
+              Text(isLoading == true ? '₹0.0' : '₹${walletModel!.walletInfo!.walletAmount!.toStringAsFixed(0)}',
                 style: TextStyle(
                   fontFamily: font,
                   fontSize: 13
@@ -362,7 +400,7 @@ class MenuScreen extends StatelessWidget {
                 //   image: AssetImage(banner1)
                 // )
               ),
-              width: double.infinity,
+              //width: double.infinity,
               height: height(context, 0.12),
               child: ClipRRect(
                   borderRadius: BorderRadius.circular(10),

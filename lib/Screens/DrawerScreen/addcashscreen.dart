@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:playon69/Extra/AppTheme.dart';
+import 'package:playon69/Extra/CommonFunctions.dart';
 import 'package:playon69/Extra/assets.dart';
-import 'package:playon69/Screens/DrawerScreen/Wallet.dart';
+import 'package:playon69/customs/CustomTextField.dart';
 
 class addcash extends StatefulWidget {
   const addcash({super.key});
@@ -10,10 +12,10 @@ class addcash extends StatefulWidget {
   State<addcash> createState() => _addcashState();
 }
 
-//
-List<int> price = [100, 200, 300, 400];
-bool ispressed = false;
-Color cardcolor = textColor1;
+List<int> price = [100, 200, 500, 1000];
+int index = 0;
+
+TextEditingController amt = TextEditingController(text: '0.0');
 
 class _addcashState extends State<addcash> {
   @override
@@ -21,13 +23,12 @@ class _addcashState extends State<addcash> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: const Text('Add Cash',
+        title: Text('Add Cash',
             style: TextStyle(
               fontSize: 14, 
               fontFamily: font
             )
           ),
-        //automaticallyImplyLeading: false,
         backgroundColor: appBarColor,
         leading: IconButton(
           onPressed: () {
@@ -35,265 +36,258 @@ class _addcashState extends State<addcash> {
           },
           icon: ImageIcon(AssetImage(backicon))
         ),
-        titleSpacing: -5,
+        titleSpacing: -4,
       ),
       body: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 20),
-            child: Text('Total Available Balance',
-              style: TextStyle(
-                fontSize: 14,
-                fontFamily: font,
-                color: textColor2,
-                fontWeight: FontWeight.bold
-              )
-            ),
-          ),
-          SizedBox(
-            height: 5,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset(coin, height: 15),
-              Padding(
-                padding: const EdgeInsets.only(left: 6),
-                child: Text('Rs 100.0',
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontFamily: font,
-                    color: textColor5,
-                    fontWeight: FontWeight.bold
-                  )
-                ),
-              ),
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 20),
-            child: Container(
-              height: 430,
-              decoration: const BoxDecoration(
-                shape: BoxShape.rectangle,
-                color: upcomingmatchCardBottomBg,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(25.0),
-                  topRight: Radius.circular(25),
-                  bottomLeft: Radius.zero,
-                  bottomRight: Radius.zero,
-                ),
-              ),
-              child: Column(children: [
-                SizedBox(
-                  height: 20,
-                ),
-
-                // Note: Same code is applied for the TextFormField as well
-                SizedBox(
-                  height: 70,
-                  width: 340,
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      labelText: "Amount to Add", // icon is 48px
-
-                      filled: true, //<-- SEE HERE
-                      fillColor: textColor1,
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                            width: 0, color: textColor1), //<-- SEE HERE
-                        borderRadius: BorderRadius.circular(25),
+          Container(
+            padding: EdgeInsets.all(15),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Column(
+                  children: [
+                    Text('Total Available Balance',
+                      style: TextStyle(
+                        fontFamily: font,
+                        fontSize: 16,
+                        color: textColor2
                       ),
                     ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                    left: 250,
-                  ),
-                  child: Text(
-                    '(Rs 23 to 10,000)',
-                    style: TextStyle(
-                      fontSize: 13,
-                      fontFamily: font,
-                      color: textColor4,
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 20),
-                  child: Text(
-                    'Or Select one of the amounts from below',
-                    style: TextStyle(
-                        fontSize: 14,
-                        fontFamily: font,
-                        color: textColor2,
-                        fontWeight: FontWeight.bold),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 15),
-                  child: Text(
-                      'Use UPI/Bank Transfer when you withdraw more then Rs',
-                      style: TextStyle(
-                        fontSize: 13,
-                        fontFamily: font,
-                        color: textColor4,
-                      )),
-                ),
-                // Row(
-                //   children: <Widget>[
-                //     Flexible(
-                //       flex: 2,
-                //       child: TextFormField(
-                //         textAlign: TextAlign.left,
-                //         style: TextStyle(fontSize: 11.0),
-                //         decoration: InputDecoration(
-                //             contentPadding: new EdgeInsets.symmetric(vertical: 0.0),
-                //             border: InputBorder.none,
-                //             prefixIcon: Padding(
-                //               padding: EdgeInsets.all(0.0),
-                //               child: Icon(
-                //                 Icons.search,
-                //                 color: Colors.grey,
-                //               ), // icon is 48px widget.
-                //             ),
-                //             hintText: 'Search artist, genre, playlist',
-                //             hintStyle: TextStyle(fontSize: 11.0)),
-                //       ),
-                //     ),
-                //   ],
-                // ),
-                SizedBox(
-                  height: 50,
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 13),
-                  child: Row(
-                    //  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      for (int i = 0; i < price.length; i++)
-                        InkWell(
-                          child: Card(
-                            borderOnForeground: true,
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-
-                                   Image.asset(coin, height: 15),
-
-
-                                  Text('Rs ${price[i]}',
-                                      style: TextStyle(
-                                        fontSize: 12,
-                                        fontFamily: font,
-                                        color: textColor2,
-                                      )),
-
-                                SizedBox(
-                                  height: 30,
-                                ),
-                              ],
-                            ),
-                            margin: EdgeInsets.all(10),
-                            shape: const RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(12))),
+                    SizedBox(height: 10,),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset(coin,height: 15,),
+                        SizedBox(width: 10,),
+                        Text('20000.0',
+                          style: TextStyle(
+                            fontFamily: font,
+                            color: textColor5,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18
                           ),
-
-                          onTap: () {
-                            setState(() {
-                              cardcolor = cardcolor == textColor5
-                                  ? textColor1
-                                  : textColor5;
-                            });
-
-                            print('on tap');
-                          },
-
-                          //
+                        ),
+                      ],
+                    )
+                  ],
+                )
+              ],
+            ),
+          ),
+          Expanded(
+            child: Container(
+              padding: EdgeInsets.all(15),
+              decoration: BoxDecoration(
+                color: upComingBg,
+                borderRadius: BorderRadius.only(
+                  topRight: Radius.circular(30),
+                  topLeft: Radius.circular(30)
+                )
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  CustomTextField(
+                    font: font,
+                    fontColor: textColor4,
+                    fontSize: 12,
+                    radiusSize: 10,
+                    paddingSize: EdgeInsets.all(10),
+                    label: 'Amount to add', 
+                    widget: TextFormField(
+                      validator: (data){
+                        if(data==null){
+                          return 'Amount to add';
+                        }
+                        return null;
+                      },
+                      decoration: InputDecoration(
+                        //prefix: Image.asset(coin,height: 20,),
+                        border: InputBorder.none,
+                        hintText: 'Amount to add',
+                        hintStyle: TextStyle(
+                          fontFamily: font
                         )
+                      ),
+                      controller: amt,
+                    )
+                  ),
+                  SizedBox(height: 10,),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Text('(Rs. 25 to Rs. 10,000)',
+                        style: TextStyle(
+                          fontFamily: font,
+                          color: textColor4,
+                          fontSize: 11
+                        ),
+                      )
                     ],
                   ),
-                ),
-
-                Row(
-                  children: [
-                    for (int i = 0; i < 2; i++)
-                      Container(
-                        decoration: BoxDecoration(),
-                        child: Row(
-                          children: [
-                            if (i == 0)
-                              Column(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 20,
-                                        right: 30,
-                                        top: 20,
-                                        bottom: 10),
-                                    //child: Image.asset(upi, height: 25),
-                                  ),
-                                  Text('Pay Using UPI',
-                                      style: TextStyle(
-                                        fontSize: 12,
-                                        fontFamily: font,
-                                        color: textColor2,
-                                      ))
-                                ],
-                              ),
-                            if (i == 1)
-                              Column(children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 40, right: 20, top: 20, bottom: 10),
-                                  //child: Image.asset(upi, height: 25),
+                  SizedBox(height: 30,),
+                  Text('Or Select one of the amounts from below',
+                    style: TextStyle(
+                      fontFamily: font,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: textColor2
+                    ),
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  Text('Use UPI/Bank Transfer when you withdraw more then Rs.',
+                    style: TextStyle(
+                      fontFamily: font,
+                      fontSize: 12,
+                      color: textColor4
+                    ),
+                  ),
+                  SizedBox(height: 30,),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      for(int x=0; x<price.length; x++)
+                      InkWell(
+                        onTap: (){
+                          amt.text = price[x].toString();
+                        },
+                        child: Container(
+                          padding: EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                            color: tileBgColor,
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(5)
+                            )
+                          ),
+                          child: Row(
+                            children: [
+                              Image.asset(coin,height: 15,),
+                              SizedBox(width: 10,),
+                              Text('${price[x]}',
+                                style: TextStyle(
+                                  fontFamily: font,
+                                  fontSize: 14,
+                                  color: textColor2
                                 ),
-                                Text('Credit Card/Debit Card',
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                      fontFamily: font,
-                                      color: textColor2,
-                                    )),
-                              ])
-                          ],
+                              )
+                            ],
+                          ),
                         ),
                       ),
-                  ],
-                ),
-              ]),
-              //
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 100),
-            child: InkWell(
-              child: Container(
-                decoration: BoxDecoration(
-                  shape: BoxShape.rectangle,
-                  color: textColor5,
-                  borderRadius: const BorderRadius.all(
-                    Radius.circular(7),
+                    ],
                   ),
-                ),
-                height: 50,
-                width: 300,
-                child: Center(
-                  child: const Text("Pay Now",
-                      style: TextStyle(
-                          fontSize: 15, fontFamily: font, color: textColor1)),
-                ),
+                  SizedBox(height: 40,),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      InkWell(
+                        onTap: (){
+                          setState(() {
+                            index = 0;
+                          });
+                        },
+                        child: Container(
+                          width: width(context, 0.35),
+                          padding: EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                            color: tileBgColor,
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(10)
+                            ),
+                            border: Border.all(
+                              width: 2,
+                              color: index==0 ? borderColor2 : borderColor
+                            )
+                          ),
+                          child: Column(
+                            children: [
+                              SvgPicture.asset(upi),
+                              SizedBox(height: 10,),
+                              Text('Pay Using UPI',
+                                style: TextStyle(
+                                  fontFamily: font,
+                                  fontSize: 14,
+                                  color: textColor2
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                      InkWell(
+                        onTap: (){
+                          setState(() {
+                            index = 1;
+                          });
+                        },
+                        child: Container(
+                          width: width(context, 0.35),
+                          padding: EdgeInsets.all(5),
+                          decoration: BoxDecoration(
+                            color: tileBgColor,
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(10)
+                            ),
+                            border: Border.all(
+                              width: 2,
+                              color: index==1 ? borderColor2 : borderColor
+                            )
+                          ),
+                          child: Column(
+                            children: [
+                              Image.asset(creditCard,
+                                height: 30,
+                              ),
+                              SizedBox(height: 5,),
+                              Text('Credit/Debit Card',
+                                style: TextStyle(
+                                  fontFamily: font,
+                                  fontSize: 14,
+                                  color: textColor2
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  )
+                ],
               ),
-              onTap: () {
-                print('tep on button');
-              },
             ),
-          ),
+          )
         ],
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: InkWell(
+        onTap: (){
+          //Navigator.push(context, MaterialPageRoute(builder: (ctx) => CreateTeam(match: widget.match,)));
+        },
+        child: Container(
+          height: height(context, 0.06),
+          width: width(context, 0.9),
+          alignment: Alignment.center,
+          padding: EdgeInsets.only(
+            top: 15,
+            bottom: 15
+          ),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(
+              Radius.circular(5)
+            ),
+            color: buttonBgColor
+          ),
+          child: Text('Pay Now',
+            style: TextStyle(
+              fontFamily: font,
+              color: textColor1
+            ),
+          ),
+        ),
+      )
     );
   }
 }

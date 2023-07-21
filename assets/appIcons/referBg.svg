@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="375" height="431.999" viewBox="0 0 375 431.999">
+    <defs>
+        <filter id="cc950xtg1a" x="0" y="0" width="375" height="431.999" filterUnits="userSpaceOnUse">
+            <feOffset dy="3"/>
+            <feGaussianBlur stdDeviation="5" result="blur"/>
+            <feFlood flood-color="#dedede" flood-opacity=".102"/>
+            <feComposite operator="in" in2="blur"/>
+            <feComposite in="SourceGraphic"/>
+        </filter>
+    </defs>
+    <g data-name="Group 33863">
+        <g style="filter:url(#cc950xtg1a)">
+            <path data-name="Subtraction 1" d="M-761 146h-313a15.9 15.9 0 0 1-11.314-4.686A15.9 15.9 0 0 1-1090 130V-63.007c.156 0 .324.007.5.007a17.52 17.52 0 0 0 17.5-17.5 17.52 17.52 0 0 0-17.5-17.5c-.163 0-.331 0-.5.007V-240a15.894 15.894 0 0 1 4.686-11.313A15.9 15.9 0 0 1-1074-256h313a15.9 15.9 0 0 1 11.314 4.686A15.894 15.894 0 0 1-745-240v142.007c-.158 0-.326-.007-.5-.007A17.52 17.52 0 0 0-763-80.5 17.52 17.52 0 0 0-745.5-63c.165 0 .333 0 .5-.007V130a15.9 15.9 0 0 1-4.686 11.314A15.9 15.9 0 0 1-761 146z" transform="translate(1105 268)" style="fill:#fff"/>
+        </g>
+        <path data-name="Line 1" transform="translate(34.5 187.5)" style="fill:none;stroke:#8e9193;stroke-dasharray:2.5" d="M0 0h307"/>
+    </g>
+</svg>

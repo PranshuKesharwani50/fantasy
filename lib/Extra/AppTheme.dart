@@ -16,6 +16,15 @@ const Color textColor5 = Color(0xFFe10413);
 const Color textColor6 = Color(0xFF021544);
 const Color textColor7 = Color(0xFFd29f11);
 
+//textColor of app
+const Color iconColor1 = Color(0xFFffffff);
+const Color iconColor2 = Color(0xFF000000);
+const Color iconColor3 = Color(0xFF0ba839);
+const Color iconColor4 = Color(0xFF8e9193);
+const Color iconColor5 = Color(0xFFe10413);
+const Color iconColor6 = Color(0xFF021544);
+const Color iconColor7 = Color(0xFFd29f11);
+
 //border color
 const Color borderColor = Color(0xFFffffff);
 const Color borderColor1 = Color(0xFF000000);
@@ -49,6 +58,7 @@ const Color appBgColor2 = Color(0xff000000);
 const Color greenBg = Color(0xFFeaf5dd);
 const Color pinkBg = Color(0xFFfce8e8);
 const Color progressBarBgColor = Color(0xFFe5e5e5);
+const Color profileBgColor = Color(0xFF424242);
 
 //sColor.fromARGB(255, 179, 182, 184)x color
 LinearGradient selectedPlayerBox = LinearGradient(
@@ -71,7 +81,6 @@ LinearGradient bannerBg = LinearGradient(
       Color(0xFFf9ab13),
     ]
   );
-
 
 const Color deleteButtonColor = Color(0xFFf51112);
 const Color progressColor = Color(0xFFf82526);

@@ -39,7 +39,8 @@ class _DashboardState extends State<Dashboard> {
   Widget build(BuildContext context) {
     return Scaffold(
       //backgroundColor: appBgColor,
-      appBar: AppBar(
+      
+      appBar: _selectedIndex!=2 ? AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: appBarColor,
         titleSpacing: 10,
@@ -65,13 +66,13 @@ class _DashboardState extends State<Dashboard> {
             },
           ),
           SizedBox(width: 10,),
-          InkWell(
-            child: SvgPicture.asset(notificationHome),
-            onTap: (){},
-          ),
-          SizedBox(width: 10,),
+          // InkWell(
+          //   child: SvgPicture.asset(notificationHome),
+          //   onTap: (){},
+          // ),
+          // SizedBox(width: 10,),
         ],
-      ),
+      ) : null,
       body: Stack(
         children: [
           allScreens[_selectedIndex],
@@ -121,8 +122,8 @@ class _DashboardState extends State<Dashboard> {
                     //SizedBox(width: 60,),
                     Expanded(
                       child: BottomBarButton(
-                      icon: upgradeApp,
-                      buttonLabel: 'UpgradeApp',
+                      icon: myAccount,
+                      buttonLabel: 'My Accounts',
                       fontsize: 10,
                       //fontFamily: font,
                       color: _selectedIndex == 2 ? buttomBarButtonColor : bottomBarButtonColor2,
