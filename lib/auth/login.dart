@@ -125,7 +125,7 @@ class _LoginWidgetState extends State<LoginWidget> {
         Fluttertoast.showToast(msg: '${responce['message']}');
         Future.delayed(Duration(seconds: 1),(){
           Navigator.of(context).pop();
-          Navigator.push(context, MaterialPageRoute(builder: (ctx)=>OtpVerification(number: mno.text.trim(),token: responce['token'],)));
+          Navigator.push(context, MaterialPageRoute(builder: (ctx)=>OtpVerification(number: mno.text.trim(),token: responce['token'],newAccout: true,)));
         });
       }else{
         Navigator.of(context).pop();

@@ -52,7 +52,7 @@ class _JoinContestConfermationState extends State<JoinContestConfermation> {
     var res = await retrivePref(method: methods.Maps, key: 'currentUser');
     var responce = await joinContest(res['token'], '${widget.match!.matchId!}', res['user_data']['user_name'], widget.contestId!, widget.teamIds!);
     print('join : $responce');
-    if(responce['code']==200){
+    if(responce['status']==true){
       //getMatchData();
       Navigator.of(context).pop();
       Fluttertoast.showToast(msg: responce['message']);
@@ -76,7 +76,7 @@ class _JoinContestConfermationState extends State<JoinContestConfermation> {
         mainAxisSize: MainAxisSize.min,
         children: [
       Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        // crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Column(
@@ -103,7 +103,7 @@ class _JoinContestConfermationState extends State<JoinContestConfermation> {
                       color: textColor5
                     ),
                     ),
-                    Image.asset(coin)
+                    Image.asset(coin,height: 15,)
                   ],
                 )
               ],
@@ -112,7 +112,7 @@ class _JoinContestConfermationState extends State<JoinContestConfermation> {
               onTap: (){
                 Navigator.of(context).pop();
               },
-              child: Image.asset(close)
+              child: SvgPicture.asset(close,)
             ),
           ],
         ),
@@ -129,12 +129,13 @@ class _JoinContestConfermationState extends State<JoinContestConfermation> {
             ),
             Row(
               children: [
-                Image.asset(coin),
+                Image.asset(coin,height:15),
                 Text('$totalFee',
                   style: TextStyle(
                    fontSize: 13,
                    fontFamily: font,
-                   color: textColor2
+                   color: textColor2,
+                   fontWeight: FontWeight.bold
                  ),
                ),
              ],
@@ -154,12 +155,13 @@ class _JoinContestConfermationState extends State<JoinContestConfermation> {
            ),
            Row(
              children: [
-               Image.asset(coin),
+               Image.asset(coin,height: 15,),
                Text(' - $totalBonus',
                  style: TextStyle(
                    fontSize: 13,
                    fontFamily: font,
-                   color: textColor2
+                   color: textColor2,
+                   fontWeight: FontWeight.bold
                  ),
                ),
              ],
@@ -189,12 +191,13 @@ class _JoinContestConfermationState extends State<JoinContestConfermation> {
             ),
             Row(
               children: [
-                Image.asset(coin),
+                Image.asset(coin,height: 15,),
                   Text('$totalAmt',
                     style: TextStyle(
                     fontSize: 13,
                     fontFamily: font,
-                    color: textColor5
+                    color: textColor5,
+                    fontWeight: FontWeight.bold
                   ),
                 ),
               ],

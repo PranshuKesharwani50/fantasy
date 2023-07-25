@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:playon69/Screens/DrawerScreen/Web/SupportWebView.dart';
+import 'package:playon69/Screens/DrawerScreen/Web/paymentWebViewScreen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../Extra/AppTheme.dart';
@@ -17,6 +19,10 @@ class Supports extends StatelessWidget {
     );
     await launchUrl(lauch);
 
+  }
+
+  void jump(BuildContext context, String title, String url){
+    Navigator.push(context, MaterialPageRoute(builder: ((context) => SupportWebView(title: title,url: url))));
   }
 
   @override
@@ -194,23 +200,53 @@ class Supports extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       InkWell(
-                        onTap: (){},
+                        onTap: (){
+                          jump(
+                            context, 
+                            'Facebook', 
+                            'https://www.facebook.com/117850604544966/posts/pfbid025Jsv3Hm6eJ644G6HQWyWHJFhQeUQh24qu2t5JpEmd5oaRS62UT27DyPrxNrkPDpfl/?sfnsn=wiwspmo&mibextid=RUbZ1f'
+                          );
+                        },
                         child: Image.asset(fb,height: 40,),
                       ),
                       InkWell(
-                        onTap: (){},
+                        onTap: (){
+                          jump(
+                            context, 
+                            'Instagram', 
+                            'https://www.instagram.com/playon69_/?igshid=ZDdkNTZiNTM%3D'
+                          );
+                        },
                         child: Image.asset(insta,height: 40,),
                       ),
                       InkWell(
-                        onTap: (){},
+                        onTap: (){
+                          jump(
+                            context, 
+                            'Youtube', 
+                            'https://www.youtube.com/@ajaykumar-vu8su'
+                          );
+                        },
                         child: Image.asset(yt,height: 40,),
                       ),
                       InkWell(
-                        onTap: (){},
+                        onTap: (){
+                          jump(
+                            context, 
+                            'Twitter', 
+                            'https://twitter.com/Play0n69'
+                          );
+                        },
                         child: Image.asset(tw,height: 40,),
                       ),
                       InkWell(
-                        onTap: (){},
+                        onTap: (){
+                          jump(
+                            context, 
+                            'Telegram', 
+                            'tg://resolve?domain=playon69'
+                          );
+                        },
                         child: Image.asset(tg,height: 35,),
                       ),
                     ],

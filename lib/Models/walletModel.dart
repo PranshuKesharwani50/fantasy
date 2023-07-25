@@ -35,17 +35,17 @@ class WalletModel{
 class WalletInfo{
 
   String? userId;
-  double? bonus;
+  int? bonus;
   int? prizeAmt;
   double? referralAmt;
-  double? depositAmt;
+  int? depositAmt;
   double? withdrawAmt;
   double? freeClips;
   int? refferalFriendsCount;
   int? bankAccountVerified;
   int? documentVerified;
   int? paytmVerified;
-  double? walletAmount;
+  int? walletAmount;
   String? minWithdrawal;
   String? minDeposit;
   AccountVerified? accountVerified;

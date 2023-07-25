@@ -222,12 +222,6 @@ class _joinTeamState extends State<joinTeam> {
                 ),
                 SizedBox(height: 2,),
                 TimerWidget(mydurStart: widget.match!.timeStampStart!,mydurEnd: widget.match!.timeStampEnd!,startingTime: widget.match!.dateStart!,),
-                // Text('Demo',
-                //   style: TextStyle(
-                //     fontFamily: font,
-                //     fontSize: 12
-                //   ),
-                // ),
               ],
             ),
           ],
@@ -324,34 +318,34 @@ class _joinTeamState extends State<joinTeam> {
                             ],
                           ),
                         ),
-                        SizedBox(height: 20,),
-                        if(index==0)
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text('All Contests (${data!.responce!.matchContests![1].contests!.length})',
-                              style: TextStyle(
-                                fontFamily: font,
-                                fontSize: 14,
-                                fontWeight: FontWeight.bold,
-                                color: textColor2
-                              ),
-                            ),
-                            Row(
-                              children: [
-                                SvgPicture.asset(filter),
-                                SizedBox(width: 5,),
-                                Text('All Filters',
-                                  style: TextStyle(
-                                    fontFamily: font,
-                                    fontSize: 12,
-                                    color: textColor4
-                                  ),
-                                ),
-                              ],
-                            )
-                          ],
-                        ),
+                        // SizedBox(height: 20,),
+                        // if(index==0)
+                        // Row(
+                        //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        //   children: [
+                        //     Text('All Contests (${data!.responce!.matchContests![1].contests!.length})',
+                        //       style: TextStyle(
+                        //         fontFamily: font,
+                        //         fontSize: 14,
+                        //         fontWeight: FontWeight.bold,
+                        //         color: textColor2
+                        //       ),
+                        //     ),
+                        //     Row(
+                        //       children: [
+                        //         SvgPicture.asset(filter),
+                        //         SizedBox(width: 5,),
+                        //         Text('All Filters',
+                        //           style: TextStyle(
+                        //             fontFamily: font,
+                        //             fontSize: 12,
+                        //             color: textColor4
+                        //           ),
+                        //         ),
+                        //       ],
+                        //     )
+                        //   ],
+                        // ),
                       ],
                     ),
                   ),

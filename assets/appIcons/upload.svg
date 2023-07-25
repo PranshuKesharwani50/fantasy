@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="60.907" height="54.459" viewBox="0 0 60.907 54.459">
+    <defs>
+        <clipPath id="mdoryxduua">
+            <path data-name="Rectangle 7700" style="fill:none" d="M0 0h48.354v42.465H0z"/>
+        </clipPath>
+    </defs>
+    <g data-name="Group 16539" transform="translate(.5 .5)">
+        <path data-name="Path 51476" d="M448.575 585.627v-34.34h-53.443v47.554h43.276a9.119 9.119 0 1 0 10.167-13.215z" transform="translate(-395.132 -549.647)" style="fill:#eadfd5;opacity:.55;mix-blend-mode:multiply;isolation:isolate"/>
+        <path data-name="Rectangle 7698" transform="rotate(90 26.721 26.722)" style="stroke-linejoin:round;stroke:#fff;fill:#fff" d="M0 0h47.554v53.443H0z"/>
+        <g data-name="Rectangle 7699" style="fill:#e5e5e5;stroke:#c7c7c7;stroke-linejoin:round">
+            <path style="stroke:none" d="M0 0h48.354v42.465H0z" transform="translate(2.544 2.544)"/>
+            <path style="fill:none" d="M-.5-.5h49.354v43.465H-.5z" transform="translate(2.544 2.544)"/>
+        </g>
+        <circle data-name="Ellipse 2803" cx="4.414" cy="4.414" r="4.414" transform="rotate(-76.83 23.68 -11.333)" style="fill:#fbf9f6"/>
+        <g data-name="Group 16532">
+            <g data-name="Group 16531" style="clip-path:url(#mdoryxduua)" transform="translate(2.544 2.544)">
+                <g data-name="Group 16530">
+                    <path data-name="Path 51477" d="m486.752 679.529 23.379-31.041 20.669 31.041z" transform="translate(-471.364 -630.368)" style="fill:#f2f2f2"/>
+                    <path data-name="Path 51478" d="m343.784 650.517 29.516-39.19 26.093 39.191z" transform="translate(-356.378 -600.48)" style="fill:#fff"/>
+                </g>
+            </g>
+        </g>
+        <g data-name="Group 16535">
+            <g data-name="Group 16534" transform="translate(42.167 34.08)">
+                <circle data-name="Ellipse 2804" cx="8.631" cy="8.631" r="8.631" transform="translate(.489 .489)" style="fill:#8e9193"/>
+                <path data-name="Path 51479" d="M619.7 718.009a8.141 8.141 0 1 1-8.141 8.141 8.141 8.141 0 0 1 8.141-8.141m0-.979a9.12 9.12 0 1 0 9.12 9.12 9.13 9.13 0 0 0-9.12-9.12z" transform="translate(-610.576 -717.03)" style="fill:#fff"/>
+            </g>
+            <path data-name="Path 51480" d="m641.78 742.58-4.93-6.133-4.97 6.133h2.82v4.506h4.3v-4.506z" transform="translate(-585.543 -698.566)" style="fill:#fff"/>
+        </g>
+    </g>
+</svg>

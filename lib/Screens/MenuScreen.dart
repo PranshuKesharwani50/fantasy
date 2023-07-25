@@ -18,6 +18,7 @@ import 'package:playon69/Screens/DrawerScreen/addcashscreen.dart';
 import 'package:playon69/Screens/DrawerScreen/changepassword.dart';
 import 'package:playon69/Screens/DrawerScreen/support.dart';
 import 'package:playon69/Screens/DrawerScreen/withdraw_money.dart';
+import 'package:playon69/Screens/others/VerifyScreen.dart';
 import 'package:playon69/apis/sharedPreference.dart';
 import 'package:playon69/auth/login.dart';
 import 'package:timezone/standalone.dart' as tz;
@@ -208,8 +209,13 @@ class _MenuScreenState extends State<MenuScreen> {
                         icon: wf,
                         title: 'Withdraw-funds',
                         press: () {
-                          Navigator.of(context).pop();
-                          Navigator.push(context,MaterialPageRoute(builder: (context) => withdraw()));
+                          if(walletModel!.walletInfo!.bankAccountVerified==2 && walletModel!.walletInfo!.documentVerified==2){
+                            Navigator.of(context).pop();
+                            Navigator.push(context,MaterialPageRoute(builder: (context) => withdraw()));
+                          }else{
+                            Navigator.of(context).pop();
+                            Navigator.push(context,MaterialPageRoute(builder: (context) => VerifyScreen()));
+                          }
                         }),
                     Drawerwidget(
                         icon: wf,

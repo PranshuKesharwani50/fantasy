@@ -15,7 +15,6 @@ import 'package:playon69/Providers/CurrentUserProvider.dart';
 import 'package:playon69/Providers/MathesProvider.dart';
 import 'package:playon69/Providers/myTeamProvider.dart';
 import 'package:playon69/Providers/playersProvider.dart';
-import 'package:playon69/Screens/DrawerScreen/Wallet.dart';
 import 'package:playon69/Screens/MenuScreen.dart';
 import 'package:playon69/apis/apis.dart';
 import 'package:playon69/apis/sharedPreference.dart';

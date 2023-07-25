@@ -1,11 +1,16 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, unused_local_variable
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:playon69/Extra/AppTheme.dart';
 import 'package:playon69/Extra/assets.dart';
+import 'package:playon69/apis/apis.dart';
 
 import '../../Extra/CommonFunctions.dart';
+import '../../Models/walletModel.dart';
+import '../../apis/callApi.dart';
+import '../../apis/sharedPreference.dart';
 import '../../customs/CustomTextField.dart';
 
 class withdraw extends StatefulWidget {
@@ -19,7 +24,44 @@ class _withdrawState extends State<withdraw> {
 
   TextEditingController amt = TextEditingController(text : '0.0');
 
-  int index = 0;
+  int index = 1;
+
+  String? userId;
+  WalletModel? walletModel;
+  bool isLoading = true;
+  
+  getUser() async{
+    var res = await retrivePref(method: methods.Maps, key: 'currentUser');
+    userId = res['user_data']['user_name'];
+    setState(() {});
+  }
+
+  getWallet() async{
+    var res = await retrivePref(method: methods.Maps, key: 'currentUser');
+    walletModel = await getWalletDetails1(context, res['token'], res['user_data']['user_name']);
+    if(walletModel!.status==true){
+      setState(() {
+        isLoading = false;
+      });
+    }
+  }
+
+  withdrawMoney() async{
+    var res = await retrivePref(method: methods.Maps, key: 'currentUser');
+    var responce = await withdrawRequest(res['token'], res['user_data']['user_name'], amt.text);
+    if(responce['status']==true){
+      Fluttertoast.showToast(msg: responce['message']);
+    }else{
+      Fluttertoast.showToast(msg: responce['message']);
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getUser();
+    getWallet();
+  }
   
   @override
   Widget build(BuildContext context) {
@@ -41,7 +83,7 @@ class _withdrawState extends State<withdraw> {
         ),
         titleSpacing: -4,
       ),
-      body: Column(
+      body: isLoading==false ? Column(
         children: [
           Container(
             padding: EdgeInsets.all(15),
@@ -63,7 +105,7 @@ class _withdrawState extends State<withdraw> {
                       children: [
                         Image.asset(coin,height: 15,),
                         SizedBox(width: 10,),
-                        Text('250.0',
+                        Text('${walletModel!.walletInfo!.prizeAmt}',
                           style: TextStyle(
                             fontFamily: font,
                             color: textColor5,
@@ -148,82 +190,80 @@ class _withdrawState extends State<withdraw> {
                       color: textColor4
                     ),
                   ),
-                  SizedBox(height: 20,),
-                  InkWell(
-                    onTap: (){
-                      setState(() {
-                        index = 0;
-                      });
-                    },
-                    child: Container(
-                      padding: EdgeInsets.all(15),
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          width: 2,
-                          color: index==0 ? borderColor2 : borderColor
-                        ),
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(10)
-                        ),
-                        color: tileBgColor
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              SvgPicture.asset(upi),
-                              SizedBox(width: 15,),
-                              Container(
-                                height: 35,
-                                decoration: BoxDecoration(
-                                  border: Border(
-                                    right: BorderSide(
-                                      width: 0.8,
-                                      color: borderColor3
-                                    )
-                                  )
-                                ),
-                              ),
-                              SizedBox(width: 15,),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text('Withdraw to UPI',
-                                    style: TextStyle(
-                                      fontFamily: font,
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold,
-                                      color: textColor2
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 5,
-                                  ),
-                                  Text('xyz2000@ybl',
-                                    style: TextStyle(
-                                      fontFamily: font,
-                                      fontSize: 13,
-                                      color: textColor4
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                          SvgPicture.asset(index==0 ? selected : unselected),
-                        ],
-                      ),
-                    ),
-                  ),
+                  // SizedBox(height: 20,),
+                  // InkWell(
+                  //   onTap: (){
+                  //     setState(() {
+                  //       index = 0;
+                  //     });
+                  //   },
+                  //   child: Container(
+                  //     padding: EdgeInsets.all(15),
+                  //     decoration: BoxDecoration(
+                  //       border: Border.all(
+                  //         width: 2,
+                  //         color: index==0 ? borderColor2 : borderColor
+                  //       ),
+                  //       borderRadius: BorderRadius.all(
+                  //         Radius.circular(10)
+                  //       ),
+                  //       color: tileBgColor
+                  //     ),
+                  //     child: Row(
+                  //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //       children: [
+                  //         Row(
+                  //           children: [
+                  //             SvgPicture.asset(upi),
+                  //             SizedBox(width: 15,),
+                  //             Container(
+                  //               height: 35,
+                  //               decoration: BoxDecoration(
+                  //                 border: Border(
+                  //                   right: BorderSide(
+                  //                     width: 0.8,
+                  //                     color: borderColor3
+                  //                   )
+                  //                 )
+                  //               ),
+                  //             ),
+                  //             SizedBox(width: 15,),
+                  //             Column(
+                  //               crossAxisAlignment: CrossAxisAlignment.start,
+                  //               children: [
+                  //                 Text('Withdraw to UPI',
+                  //                   style: TextStyle(
+                  //                     fontFamily: font,
+                  //                     fontSize: 15,
+                  //                     fontWeight: FontWeight.bold,
+                  //                     color: textColor2
+                  //                   ),
+                  //                 ),
+                  //                 SizedBox(
+                  //                   height: 5,
+                  //                 ),
+                  //                 Text('xyz2000@ybl',
+                  //                   style: TextStyle(
+                  //                     fontFamily: font,
+                  //                     fontSize: 13,
+                  //                     color: textColor4
+                  //                   ),
+                  //                 ),
+                  //               ],
+                  //             ),
+                  //           ],
+                  //         ),
+                  //         SvgPicture.asset(index==0 ? selected : unselected),
+                  //       ],
+                  //     ),
+                  //   ),
+                  // ),
                   SizedBox(
-                    height: 15,
+                    height: 20,
                   ),
                   InkWell(
                     onTap: (){
-                      setState(() {
-                        index = 1;
-                      });
+
                     },
                     child: Container(
                       padding: EdgeInsets.all(15),
@@ -291,11 +331,11 @@ class _withdrawState extends State<withdraw> {
             ),
           )
         ],
-      ),
+      ) : Center(child: SingleChildScrollView(),),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: InkWell(
         onTap: (){
-          //Navigator.push(context, MaterialPageRoute(builder: (ctx) => CreateTeam(match: widget.match,)));
+          withdrawMoney();
         },
         child: Container(
           height: height(context, 0.06),

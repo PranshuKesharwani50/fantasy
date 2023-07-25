@@ -284,3 +284,60 @@ changePass(String token,String cpass,String npass) async{
   print(res);
   return res;
 }
+
+createCashFreeOrderId(String token,String amount) async{
+
+    var responce = await http.post(
+    Uri.parse(baseApiUrl+'createCashfreeOrder'),
+    headers: {
+      'Content-Type':'application/json',
+      'Accept': 'application/json',
+      'Authorization':'Bearer $token'
+    },
+    body: json.encode({
+      "amount": amount,
+    })
+  );
+  var res = json.decode(responce.body);
+  print(res);
+  return res;
+
+}
+
+withdrawRequest(String token,String userid,String amount) async{
+
+  var responce = await http.post(
+    Uri.parse(baseApiUrl+'withdrawAmount'),
+    headers: {
+      'Content-Type':'application/json',
+      'Accept': 'application/json',
+      'Authorization':'Bearer $token'
+    },
+    body: json.encode({
+      "user_id":userid,
+      "withdraw_amount":amount
+    })
+  );
+  var res = json.decode(responce.body);
+  print(res);
+  return res;
+
+}
+
+resendOtp(String number) async{
+  
+    var responce = await http.post(
+    Uri.parse(baseApiUrl+'sendForgotPasswordOtp'),
+    headers: {
+      'Content-Type':'application/json',
+      'Accept': 'application/json',
+    },
+    body: json.encode({
+      "mobile_number":number
+    })
+  );
+  var res = json.decode(responce.body);
+  print(res);
+  return res;
+
+}

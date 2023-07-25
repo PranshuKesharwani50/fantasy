@@ -1,34 +1,89 @@
 // ignore_for_file: file_names, prefer_const_constructors, must_be_immutable, use_key_in_widget_constructors, prefer_const_literals_to_create_immutables, prefer_typing_uninitialized_variables, use_build_context_synchronously
 
+import 'dart:async';
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:playon69/Screens/MenuScreen.dart';
+import 'package:playon69/Models/UserModel.dart';
 import 'package:playon69/apis/apis.dart';
+import 'package:playon69/apis/sharedPreference.dart';
 
 import '../Extra/AppTheme.dart';
 import '../Extra/CommonFunctions.dart';
 import '../Extra/assets.dart';
+import '../Screens/MenuScreen.dart';
 import '../customs/CustomButton.dart';
 
-class OtpVerification extends StatelessWidget {
+class OtpVerification extends StatefulWidget {
   OtpVerification({
-    this.number,
-    this.token
+    required this.newAccout,
+    required this.number,
+    required this.token,
+    this.user
   });
 
   String? number;
   String? token;
+  bool? newAccout;
+  LoginResponceModel? user;
+
+  @override
+  State<OtpVerification> createState() => _OtpVerificationState();
+}
+
+class _OtpVerificationState extends State<OtpVerification> {
+
+  int sec = 29;
+  Timer? timer;
+
+  startTimer(){
+    timer = Timer.periodic(Duration(seconds: 1),(timer){
+      if(sec==0){
+        timer.cancel();
+        sec = 30;
+        setState(() {});
+      }else{
+        setState(() {
+          sec--;
+        });
+      }
+    });
+  }
+
+  @override
+  void initState() {
+    startTimer();
+    super.initState();
+  }
+
   var otpData;
 
   void verify(BuildContext context) async{
-    var responce = await verifyOtp(otpData, token!);
+    var responce = await verifyOtp(otpData, widget.token!);
     if(responce['status']==true){
       Fluttertoast.showToast(msg: '${responce['message']}');
-      Navigator.push(context, MaterialPageRoute(builder: ((context) => MenuScreen())));
+      if(widget.newAccout==true){
+        Navigator.push(context, MaterialPageRoute(builder: ((context) => MenuScreen())));
+      }else{
+        widget.user!.userData!.accountVerified = 1;
+        insertPref(method: methods.String, key: 'currentUser', value: json.encode(widget.user));
+        print(widget.user.toString());
+        Navigator.of(context).pop();
+      }
     }else{
       Fluttertoast.showToast(msg: '${responce['message']}');
+    }
+  }
+
+  resentOtp() async{
+    var res = await resendOtp(widget.number!);
+    if(res['status']==true){
+      Fluttertoast.showToast(msg: res['message']);
+    }else{
+      Fluttertoast.showToast(msg: res['message']);
     }
   }
 
@@ -132,7 +187,7 @@ class OtpVerification extends StatelessWidget {
                                 ),
                               ),
                               SizedBox(height: 5,),
-                              Text('+91 $number',
+                              Text('+91 ${widget.number}',
                                 style: TextStyle(
                                   fontSize: 14,
                                   fontFamily: font,
@@ -170,7 +225,11 @@ class OtpVerification extends StatelessWidget {
                                     ),
                                   ),
                                   SizedBox(width: 5,),
+                                  if(sec == 30)
                                   InkWell(
+                                    onTap: (){
+                                      startTimer();
+                                    },
                                     child: Text('Resend OTP?',
                                       style: TextStyle(
                                         fontSize: 15,
@@ -179,6 +238,14 @@ class OtpVerification extends StatelessWidget {
                                       ),
                                     ),
                                   ),
+                                  if(sec > 0 && sec != 30)
+                                  Text('00:$sec',
+                                    style: TextStyle(
+                                      fontFamily: font,
+                                      color: textColor4,
+                                      fontSize: 15
+                                    ),
+                                  )
                                 ],
                               ),
                               SizedBox(height: 30,),

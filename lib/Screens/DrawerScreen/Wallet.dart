@@ -10,6 +10,7 @@ import 'package:playon69/Models/walletModel.dart';
 import 'package:playon69/Screens/DrawerScreen/TransactionHistory.dart';
 import 'package:playon69/Screens/DrawerScreen/addcashscreen.dart';
 import 'package:playon69/Screens/DrawerScreen/withdraw_money.dart';
+import 'package:playon69/Screens/others/VerifyScreen.dart';
 import 'package:playon69/apis/callApi.dart';
 import 'package:playon69/customs/CustomButton.dart';
 
@@ -322,33 +323,38 @@ class _WalletState extends State<Wallet> {
                         ),
                         child: Column(
                           children: [
-                            Container(
-                              padding: EdgeInsets.all(20),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(10),
-                                  topRight: Radius.circular(10)
-                                ),
-                                color: tileBgColor
-                              ),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Row(
-                                    children: [
-                                      SvgPicture.asset(kyc),
-                                      SizedBox(width: 20),
-                                      Text('KYC & Verify Details',
-                                        style: TextStyle(
-                                          fontFamily: font,
-                                          fontSize: 13,
-                                          color: textColor6
-                                        ),
-                                      ),
-                                    ],
+                            InkWell(
+                              onTap: (){
+                                Navigator.push(context, MaterialPageRoute(builder: ((context) => VerifyScreen())));
+                              },
+                              child: Container(
+                                padding: EdgeInsets.all(20),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(10),
+                                    topRight: Radius.circular(10)
                                   ),
-                                  SvgPicture.asset(goIn)
-                                ],
+                                  color: tileBgColor
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        SvgPicture.asset(kyc),
+                                        SizedBox(width: 20),
+                                        Text('KYC & Verify Details',
+                                          style: TextStyle(
+                                            fontFamily: font,
+                                            fontSize: 13,
+                                            color: textColor6
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    SvgPicture.asset(goIn)
+                                  ],
+                                ),
                               ),
                             ),
                             Container(
@@ -533,7 +539,11 @@ class _WalletState extends State<Wallet> {
                             ),
                             InkWell(
                               onTap: (){
-                                Navigator.push(context, MaterialPageRoute(builder: ((context) => withdraw())));
+                                if(walletModel!.walletInfo!.bankAccountVerified==2 && walletModel!.walletInfo!.documentVerified==2){
+                                  Navigator.push(context,MaterialPageRoute(builder: (context) => withdraw()));
+                                }else{
+                                  Navigator.push(context,MaterialPageRoute(builder: (context) => VerifyScreen()));
+                                }
                               },
                               child: Container(
                                 alignment: Alignment.center,

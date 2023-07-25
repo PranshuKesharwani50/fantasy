@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+    <defs>
+        <linearGradient id="01m5ezg8vb" x1=".893" y1=".043" x2=".2" y2="1" gradientUnits="objectBoundingBox">
+            <stop offset="0" stop-color="#f5b86e"/>
+            <stop offset="1" stop-color="#de9c4e"/>
+        </linearGradient>
+        <filter id="ista6id1wa" x="0" y="0" width="64" height="64" filterUnits="userSpaceOnUse">
+            <feOffset dy="3"/>
+            <feGaussianBlur stdDeviation="3" result="blur"/>
+            <feFlood flood-color="#f19857" flood-opacity=".2"/>
+            <feComposite operator="in" in2="blur"/>
+            <feComposite in="SourceGraphic"/>
+        </filter>
+    </defs>
+    <g data-name="Group 31107">
+        <g data-name="Group 31105">
+            <g style="filter:url(#ista6id1wa)">
+                <rect data-name="Rectangle 10531" width="46" height="46" rx="7" transform="translate(9 6)" style="fill:#f19857"/>
+            </g>
+            <path data-name="Path 65603" d="M38.023 0a7.488 7.488 0 0 1 7.488 7.488v31.024A7.488 7.488 0 0 1 38.023 46H7c4.978-7.437 3.363-3.635 31.023-46z" transform="translate(9.488 6)" style="fill:url(#01m5ezg8vb)"/>
+        </g>
+        <path data-name="Path 62264" d="M118.79 36.414v-1.326h.884a.887.887 0 0 0 .884-.884v-.884h.884a.443.443 0 0 0 .442-.442v-1.767a.445.445 0 0 0-.292-.416l-12.375-4.42a.427.427 0 0 0-.3 0L96.542 30.7a.439.439 0 0 0-.292.416v1.768a.443.443 0 0 0 .442.442h.884v.874a.887.887 0 0 0 .884.884h.884v1.326a.443.443 0 0 0 .442.442v7.955a.443.443 0 0 0-.442.442v1.331h-.884a.887.887 0 0 0-.884.884v.884a1.33 1.33 0 0 0-1.326 1.326v1.768a.443.443 0 0 0 .442.442h24.75a.443.443 0 0 0 .442-.442v-1.769a1.33 1.33 0 0 0-1.326-1.326v-.884a.887.887 0 0 0-.884-.884h-.884v-1.325a.443.443 0 0 0-.442-.442v-7.956a.443.443 0 0 0 .442-.442zm-.884-.442h-1.768v-.884h1.768zm-2.21 8.839a.443.443 0 0 0-.442.442v1.327h-4.42v-1.326a.443.443 0 0 0-.442-.442v-7.956a.443.443 0 0 0 .442-.442v-1.326h4.42v1.326a.443.443 0 0 0 .442.442zm-12.817 1.769v-1.326a.443.443 0 0 0-.442-.442v-7.956a.443.443 0 0 0 .442-.442v-1.326h4.42v1.326a.443.443 0 0 0 .442.442v7.955a.443.443 0 0 0-.442.442v1.327zm6.63-1.768h-.884v-7.956h.884zm.442-8.839h-1.768v-.884h1.768zm-1.768 9.727h1.768v.884h-1.768zM97.134 31.42l11.933-4.261L121 31.42v1.017H97.134zm1.326 1.9h21.214v.88H98.46zm3.54 1.769v.884h-1.768v-.884zm-1.326 1.768h.884v7.955h-.884zm-.442 8.839H102v.884h-1.768zM121 49.674V51H97.134v-1.326a.443.443 0 0 1 .442-.442h22.982a.443.443 0 0 1 .442.442zm-1.326-1.326H98.46v-.884h21.214zm-3.536-1.768v-.88h1.768v.884zm1.326-1.768h-.884v-7.955h.884z" transform="translate(-77.067 -10.399)" style="fill:#fff"/>
+    </g>
+</svg>

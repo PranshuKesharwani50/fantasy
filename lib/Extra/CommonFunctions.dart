@@ -55,6 +55,7 @@ joinContestDailog(
   ){
 
   showDialog(
+    barrierDismissible: true,
     context: context, 
     builder: (cxt){
       return Dialog(

@@ -1,9 +1,17 @@
+// ignore_for_file: unused_import
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:playon69/Extra/AppTheme.dart';
 import 'package:playon69/Extra/CommonFunctions.dart';
 import 'package:playon69/Extra/assets.dart';
+import 'package:playon69/Screens/DrawerScreen/Web/PaymentMethod.dart';
+import 'package:playon69/Screens/DrawerScreen/Web/paymentWebViewScreen.dart';
 import 'package:playon69/customs/CustomTextField.dart';
+
+import '../../Models/walletModel.dart';
+import '../../apis/callApi.dart';
+import '../../apis/sharedPreference.dart';
 
 class addcash extends StatefulWidget {
   const addcash({super.key});
@@ -12,12 +20,40 @@ class addcash extends StatefulWidget {
   State<addcash> createState() => _addcashState();
 }
 
-List<int> price = [100, 200, 500, 1000];
-int index = 0;
-
-TextEditingController amt = TextEditingController(text: '0.0');
-
 class _addcashState extends State<addcash> {
+
+  List<int> price = [100, 200, 500, 1000];
+  int index = 0;
+
+  String? userId;
+  WalletModel? walletModel;
+  bool isLoading = true;
+  
+  getUser() async{
+    var res = await retrivePref(method: methods.Maps, key: 'currentUser');
+    userId = res['user_data']['user_name'];
+    setState(() {});
+  }
+
+  getWallet() async{
+    var res = await retrivePref(method: methods.Maps, key: 'currentUser');
+    walletModel = await getWalletDetails1(context, res['token'], res['user_data']['user_name']);
+    if(walletModel!.status==true){
+      setState(() {
+        isLoading = false;
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getUser();
+    getWallet();
+  }
+
+  TextEditingController amt = TextEditingController(text: '0.0');
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,7 +74,7 @@ class _addcashState extends State<addcash> {
         ),
         titleSpacing: -4,
       ),
-      body: Column(
+      body: isLoading == false ? Column(
         children: [
           Container(
             padding: EdgeInsets.all(15),
@@ -60,7 +96,7 @@ class _addcashState extends State<addcash> {
                       children: [
                         Image.asset(coin,height: 15,),
                         SizedBox(width: 10,),
-                        Text('20000.0',
+                        Text('${walletModel!.walletInfo!.walletAmount}',
                           style: TextStyle(
                             fontFamily: font,
                             color: textColor5,
@@ -260,10 +296,16 @@ class _addcashState extends State<addcash> {
             ),
           )
         ],
-      ),
+      ) : Center(child: CircularProgressIndicator()),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: InkWell(
         onTap: (){
+          if(index==0){
+            print(userId);
+            Navigator.push(context, MaterialPageRoute(builder: (ctx) => PaymentWebviewScreen(title: 'UPI Payment',endPoint: 'externalUpiPayment?user_id=$userId&amount=${amt.text}',)));
+          }else{
+            //Navigator.push(context, MaterialPageRoute(builder: (ctx) => PaymentMethod()));
+          }
           //Navigator.push(context, MaterialPageRoute(builder: (ctx) => CreateTeam(match: widget.match,)));
         },
         child: Container(

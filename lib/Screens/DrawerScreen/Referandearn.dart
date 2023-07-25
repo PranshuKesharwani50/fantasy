@@ -101,14 +101,45 @@ class _referandearnState extends State<referandearn> {
                     width: double.infinity,
                   ),
                   Container(
+                    padding: EdgeInsets.all(40),
                     child: Column(
                       children: [
                         Container(
                           child: Row(
                             children: [
-                              Text('REFERRAL CODE'),
-                              Container(),
-                              
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text('REFERRAL CODE'),
+                                  Container(),
+                                  Text('DEMO123'),
+                                ],
+                              ),
+                              InkWell(
+                                onTap: (){},
+                                child: Container(
+                                  padding: EdgeInsets.all(8),
+                                  decoration: BoxDecoration(
+                                    color: buttonBgColor,
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(5)
+                                    )
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      Icon(Icons.copy,size: 15,color: iconColor1,),
+                                      SizedBox(width: 2,),
+                                      Text('Copy',
+                                        style: TextStyle(
+                                          fontSize: 13,
+                                          fontFamily: font,
+                                          color: textColor1
+                                        ),
+                                      ),
+                                    ],
+                                  )
+                                ),
+                              ),
                             ],
                           ),
                         )

@@ -125,10 +125,6 @@ class _SelectTeamState extends State<SelectTeam> {
           ],
         ),
         actions: <Widget>[
-          // InkWell(
-          //   onTap: (){},
-          //   child: SvgPicture.asset(createTeamwin),
-          // ),
           SizedBox(width: 10,),
           InkWell(
             onTap: (){},
