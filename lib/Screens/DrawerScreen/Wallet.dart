@@ -508,7 +508,7 @@ class _WalletState extends State<Wallet> {
                           ],
                         ),
                         SizedBox(
-                          height: 18,
+                          height: 5,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,

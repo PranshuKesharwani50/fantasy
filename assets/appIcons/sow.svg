@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="207" height="59" viewBox="0 0 207 59">
+    <defs>
+        <linearGradient id="icca96quvb" x1=".5" x2=".5" y2="1" gradientUnits="objectBoundingBox">
+            <stop offset="0" stop-color="#50cd5d"/>
+            <stop offset="1" stop-color="#27b53d"/>
+        </linearGradient>
+        <linearGradient id="ct6ch50ccc" x1=".49" y1=".06" x2=".495" y2=".915" gradientUnits="objectBoundingBox">
+            <stop offset="0" stop-color="#57d163"/>
+            <stop offset="1" stop-color="#23b33a"/>
+        </linearGradient>
+        <filter id="3byt04o29a" x="0" y="0" width="207" height="59" filterUnits="userSpaceOnUse">
+            <feOffset dy="3"/>
+            <feGaussianBlur stdDeviation="3" result="blur"/>
+            <feFlood flood-opacity=".2"/>
+            <feComposite operator="in" in2="blur"/>
+            <feComposite in="SourceGraphic"/>
+        </filter>
+    </defs>
+    <g data-name="Group 32749">
+        <g style="filter:url(#3byt04o29a)">
+            <rect data-name="Rectangle 10482" width="189" height="41" rx="6" transform="translate(9 6)" style="fill:url(#icca96quvb)"/>
+        </g>
+        <g data-name="Group 32748">
+            <text data-name="Share Via WhatsApp" transform="translate(57.207 33)" style="font-size:15px;font-family:EncodeSansCondensed-Medium,Encode Sans;font-weight:500;fill:#fff"><tspan x="0" y="0">Share Via WhatsApp</tspan></text>
+            <path data-name="Path 66057" d="m19.475 31.167.315.187a8.61 8.61 0 0 0 4.389 1.2 8.621 8.621 0 1 0-7.3-4.039l.205.326-.871 3.181zm-5.754 3.32 1.472-5.374a10.375 10.375 0 1 1 8.989 5.194 10.368 10.368 0 0 1-4.957-1.262zm0 0" transform="translate(15.385 2.549)" style="fill:#b3b3b3"/>
+            <path data-name="Path 66058" d="m12.966 33.731 1.472-5.374a10.375 10.375 0 1 1 8.989 5.194 10.368 10.368 0 0 1-4.957-1.262z" transform="translate(16.034 3.198)" style="fill:#fff"/>
+            <path data-name="Path 66059" d="M34.632 25.227a8.624 8.624 0 0 0-7.308 13.206l.205.326-.871 3.181 3.263-.856.315.187a8.611 8.611 0 0 0 4.389 1.2 8.623 8.623 0 0 0 0-17.246z" transform="translate(4.833 -7.475)" style="fill:transparent"/>
+            <path data-name="Path 66060" d="M34.632 25.227a8.624 8.624 0 0 0-7.308 13.206l.205.326-.871 3.181 3.263-.856.315.187a8.611 8.611 0 0 0 4.389 1.2 8.623 8.623 0 0 0 0-17.246z" transform="translate(4.833 -7.475)" style="fill:url(#ct6ch50ccc)"/>
+            <path data-name="Path 66061" d="M52.453 52.838c-.194-.432-.4-.44-.583-.448l-.5-.006a.952.952 0 0 0-.691.324 2.907 2.907 0 0 0-.907 2.162 5.043 5.043 0 0 0 1.058 2.681 10.636 10.636 0 0 0 4.428 3.913c2.189.863 2.635.692 3.11.649a2.617 2.617 0 0 0 1.752-1.233 2.168 2.168 0 0 0 .151-1.232c-.065-.108-.238-.173-.5-.3s-1.53-.76-1.771-.848-.41-.13-.583.13-.669.843-.82 1.016-.3.195-.562.065a7.076 7.076 0 0 1-2.084-1.286 7.821 7.821 0 0 1-1.442-1.795c-.151-.259-.016-.4.114-.529s.259-.3.389-.454a1.757 1.757 0 0 0 .259-.432.477.477 0 0 0-.022-.454c-.065-.13-.568-1.411-.8-1.924" transform="translate(-15.584 -30.803)" style="fill-rule:evenodd;fill:#fff"/>
+        </g>
+    </g>
+</svg>

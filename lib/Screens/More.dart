@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:playon69/Screens/DrawerScreen/Profile.dart';
 import 'package:playon69/Screens/DrawerScreen/Referandearn.dart';
+import 'package:playon69/Screens/DrawerScreen/Web/paymentWebViewScreen.dart';
 import 'package:playon69/Screens/DrawerScreen/support.dart';
 
 import '../Extra/AppTheme.dart';
@@ -51,7 +52,9 @@ class More extends StatelessWidget {
           Morewidget(
             icon: Icons.leaderboard, 
             title: 'Fantasy Point System', 
-            press: (){}
+            press: (){
+              Navigator.push(context, MaterialPageRoute(builder: ((context) => WebViewScreen(title: 'Fantasy Point System',endPoint: 'fantasy-point-system'))));
+            }
           ),
           Morewidget(
             icon: Icons.privacy_tip_rounded, 
@@ -101,7 +104,8 @@ class More extends StatelessWidget {
                 ),
               ),
             ],
-          )
+          ),
+          SizedBox(height: 35,)
         ],
       ),
     );

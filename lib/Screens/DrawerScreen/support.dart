@@ -1,7 +1,8 @@
+// ignore_for_file: deprecated_member_use, must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:playon69/Screens/DrawerScreen/Web/SupportWebView.dart';
-import 'package:playon69/Screens/DrawerScreen/Web/paymentWebViewScreen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../Extra/AppTheme.dart';
@@ -9,15 +10,21 @@ import '../../Extra/CommonFunctions.dart';
 import '../../Extra/assets.dart';
 
 class Supports extends StatelessWidget {
-  const Supports({super.key});
+  Supports({super.key});
+
 
   void sendMail() async{
 
-    Uri lauch = Uri(
-      scheme: 'mailto',
-      path: 'pranshukesharwani50@gmail.com',
-    );
-    await launchUrl(lauch);
+    final recipientEmail = 'write_me@playon69.com';
+    final subject = 'Playon69';
+    final body = 'write your message here';
+    final emailUri = Uri.encodeFull('mailto:$recipientEmail?subject=$subject&body=$body');
+
+    if (await canLaunch(emailUri)) {
+      await launch(emailUri);
+    } else {
+      throw 'Could not launch mail app';
+    }
 
   }
 

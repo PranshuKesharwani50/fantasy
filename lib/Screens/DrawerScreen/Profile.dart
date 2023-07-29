@@ -3,7 +3,9 @@
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:intl/intl.dart';
 import 'package:playon69/Models/profileModel.dart';
 import 'package:playon69/apis/callApi.dart';
 
@@ -40,10 +42,10 @@ class _ProfileState extends State<Profile> {
     if(myProfile!.status==true){
       teamName.text = myProfile!.userData!.teamName!;
       name.text = myProfile!.userData!.name!;
-      gender.text = myProfile!.userData!.gender!;
+      gender.text = myProfile!.userData!.gender;
       state.text = myProfile!.userData!.state!;
       city.text = myProfile!.userData!.city!;
-      dob.text = myProfile!.userData!.dob!;
+      dob.text = myProfile!.userData!.dob;
 
       setState(() {
         isLoading = false;
@@ -271,6 +273,20 @@ class _ProfileState extends State<Profile> {
                         return null;
                       },
                       decoration: InputDecoration(
+                        suffixIcon: IconButton(
+                          onPressed: (){
+                            DatePicker.showDatePicker(
+                              context,
+                              showTitleActions: true,
+                              minTime: DateTime(1950),
+                              maxTime: DateTime(2100),
+                              onConfirm: (date){
+                                dob.text = DateFormat('dd-MM-yyyy').format(date);
+                              }
+                            );
+                          }, 
+                          icon:Icon(Icons.date_range)
+                        ),
                         border: InputBorder.none,
                         hintText: 'Enter Date Of Birth',
                         hintStyle: TextStyle(

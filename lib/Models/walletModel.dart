@@ -35,17 +35,17 @@ class WalletModel{
 class WalletInfo{
 
   String? userId;
-  int? bonus;
+  double? bonus;
   int? prizeAmt;
   double? referralAmt;
-  int? depositAmt;
+  double? depositAmt;
   double? withdrawAmt;
   double? freeClips;
   int? refferalFriendsCount;
   int? bankAccountVerified;
   int? documentVerified;
   int? paytmVerified;
-  int? walletAmount;
+  double? walletAmount;
   String? minWithdrawal;
   String? minDeposit;
   AccountVerified? accountVerified;
@@ -70,7 +70,7 @@ class WalletInfo{
 
   WalletInfo.fromJson(var json){
     userId = json['user_id'];
-    bonus = json['bonus_amount'];
+    bonus = double.parse(json['bonus_amount'].toString());
     prizeAmt = json['prize_amount'];
     referralAmt = double.parse(json['referral_amount'].toString());
     depositAmt = json['deposit_amount'];

@@ -42,7 +42,7 @@ const Color buttonBgColor3 = Color(0xFFf5f5f5);
 const Color buttonBgColor4 = Color(0xFF76ba1b);
 const Color buttonBgColor5 = Color(0xFFCBCDCF);
 
-//divider colo
+//divider color
 const Color dividerColor1 = Color(0xFFffe5e5);
 const Color dividerColor2 = Color(0xFFe2e2e2);
 const Color dividerColor3 = Color(0xFFffffff);
@@ -82,6 +82,8 @@ LinearGradient bannerBg = LinearGradient(
     ]
   );
 
+
+//others color code
 const Color deleteButtonColor = Color(0xFFf51112);
 const Color progressColor = Color(0xFFf82526);
 const Color unProgressColor = Color(0xFFc7c7c7);

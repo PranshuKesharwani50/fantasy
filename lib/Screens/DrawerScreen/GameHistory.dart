@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:playon69/Extra/AppTheme.dart';
-import 'package:playon69/Extra/assets.dart';
-import 'package:playon69/Screens/DrawerScreen/addcashscreen.dart';
-import 'package:playon69/Screens/Home.dart';
+import '../../Extra/AppTheme.dart';
+import '../../Extra/CommonFunctions.dart';
+import '../../Extra/assets.dart';
+import '../../Models/gameHistoryModel.dart';
+import '../../apis/callApi.dart';
+import '../../apis/sharedPreference.dart';
 class gamehistory extends StatefulWidget {
   const gamehistory({super.key});
 
@@ -12,222 +13,143 @@ class gamehistory extends StatefulWidget {
 }
 
 class _gamehistoryState extends State<gamehistory> {
+
+  GameHistoryModel? gameModel;
+  bool? isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    getTransactions();
+  }
+
+  getTransactions() async{
+    var res = await retrivePref(method: methods.Maps, key: 'currentUser');
+    gameModel = await getGameHistory1(context, res['token'], res['user_data']['user_name']);
+    if(gameModel!.status==true){
+      setState(() {
+        isLoading = false;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Game History',
-            style: TextStyle(fontSize: 14, fontFamily: font)),
-        //automaticallyImplyLeading: false,
+        title: Text(
+          'Game History',
+          style: TextStyle(
+            fontSize: 14,
+            fontFamily: font
+          )
+        ),
         backgroundColor: appBarColor,
-    leading: IconButton(
-    onPressed: (){
-    Navigator.pop(context);
-    },
-    icon:ImageIcon(AssetImage(backicon)
-    )
-    ),
-        titleSpacing: 4,
+        leading: IconButton(
+          onPressed: (){
+            Navigator.pop(context);
+          },
+        icon:ImageIcon(AssetImage(backicon))),
+        titleSpacing: -4,
       ),
+      body: isLoading==false ? Container(
+        padding: EdgeInsets.all(10),
+        child: ListView(
+          children: [
+            for(int x=0; x<gameModel!.gameHistory!.length; x++)
+            gameTile(gameModel!.gameHistory![x])
+          ],
+        ),
+      ) : Center(child: CircularProgressIndicator(),),
+    );
+  }
 
-      body: Column(
+  Widget gameTile(GameHistory data){
+    return Container(
+      margin: EdgeInsets.all(5),
+      padding: EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        color: tileBgColor,
+        borderRadius: BorderRadius.all(
+          Radius.circular(10)
+        )
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 8),
-            child: Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 10,top: 10,right: 10,bottom: 10),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(color:textColor2),
-                      shape: BoxShape.rectangle,
-                      color: textColor1,
-                      borderRadius: const BorderRadius.all(
-                        Radius.circular(20),
-                      ),
-                    ),
-                    height: 35,
-                    width: 80,
-                    child: Center(
-                      child: InkWell(
-                        child: const Text(
-                          "Ludo",
-                          style: TextStyle(
-                              fontSize: 13,
-                              fontFamily: font,
-                              color: Colors.black),
-                        ),
-                        onTap: () {
-                          setState(() {});
-                          print("Click event on Container");
-                        },
-                      ),
-                    ),
+          Row(
+            children: [
+              Container(
+                width: width(context, 0.16),
+                child: Text('${data.createdAt}',
+                  style: TextStyle(
+                    fontFamily: font,
+                    fontSize: 13,
+                    color: textColor4
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(left:2),
-                  child: Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.black),
-                        shape: BoxShape.rectangle,
-                        color: Colors.white,
-                        borderRadius: const BorderRadius.all(
-                          Radius.circular(20),
-                        ),
-                      ),
-                      height: 35,
-                      width: 110,
-                      child: Center(
-                        child: InkWell(
-                          child: const Text("Fantasy Sports",
-                              style: TextStyle(
-                                  fontSize: 13,
-                                  fontFamily: font,
-                                  color: Colors.black)),
-                          onTap: () {
-                            print('tep on button');
-                          },
-                        ),
-                      )),
+              ),
+              SizedBox(width: 10,),
+              Container(
+                height: 30,
+                decoration: BoxDecoration(
+                  border: Border(
+                    right: BorderSide(
+                      width: 1,
+                      color: borderColor5
+                    )
+                  )
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 10),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.black),
-                      shape: BoxShape.rectangle,
-                      color: Colors.white,
-                      borderRadius: const BorderRadius.all(
-                        Radius.circular(20),
-                      ),
+              ),
+              SizedBox(width: 10,),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('${data.gameStatusString}',
+                    style: TextStyle(
+                      fontFamily: font,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 12,
+                      color: textColor2
                     ),
-                    height: 35,
-                    width:120,
-                    child: Center(
-                        child: InkWell(
-                          child: const Text("Snake Ladder",
-                              style: TextStyle(
-                                  fontSize: 13,
-                                  fontFamily: font,
-                                  color: Colors.black)),
-                          onTap: () {
-                            print('onn tap');
-                          },
-                        )),
                   ),
-                ),
-                // Padding(
-                //     padding: const EdgeInsets.all(8.0),
-                //     child: Container(
-                //       decoration: BoxDecoration(
-                //         border: Border.all(color: Colors.black),
-                //         shape: BoxShape.rectangle,
-                //         color: Colors.white,
-                //         borderRadius: const BorderRadius.all(
-                //           Radius.circular(20),
-                //         ),
-                //       ),
-                //       height: 35,
-                //       width: 80,
-                //       child: Center(
-                //         child: InkWell(
-                //           child: const Text("Withdraw",
-                //               style: TextStyle(
-                //                   fontSize: 13,
-                //                   fontFamily: font,
-                //                   color: Colors.black)),
-                //           onTap: () {
-                //             print('on tap');
-                //           },
-                //         ),
-                //       ),
-                //     )),
-              ],
-            ),
+                  SizedBox(height: 3,),
+                  Text('Game Id: ${data.gameId}',
+                    style: TextStyle(
+                      fontFamily: font,
+                      fontSize: 11,
+                      color: textColor4
+                    ),
+                  )
+                ],
+              ),
+            ],
           ),
-          Padding(
-            padding: const EdgeInsets.only(top: 5),
-            child: Container(
-              height: 605, width: MediaQuery.of(context).size.width,
-              decoration: const BoxDecoration(
-                shape: BoxShape.rectangle,
-                color: borderColor5,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(25.0),
-                  topRight: Radius.circular(25),
-                  bottomLeft: Radius.zero,
-                  bottomRight: Radius.zero,
-                ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Row(
+                children: [
+                  Image.asset(coin,height: 15,),
+                  Text(' ₹${data.entryFee}',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontFamily: font,
+                      fontSize: 13,
+                      color: data.winStatus==1 ? textColor3 : textColor5
+                    ),
+                  )
+                ],
               ),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Card(
-                  elevation: 5,
-                  shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(12)
-                      )
-                  ),
-                  margin: const EdgeInsets.only(
-                      top: 15, left: 10, right: 10, bottom: 480),
-                  child: Column(
-                    children: [
-                      Row(
-                        children: const [
-                          Padding(
-                            padding: EdgeInsets.only(
-                              left: 10,
-                              top: 10,
-                            ),
-                            child: Text('Lost Against R4-P17_600300',
-                                style: TextStyle(
-                                    fontSize: 13,
-                                    fontFamily: font,
-                                    color: Colors.black)),
-                          ),
-                          // Image.asset(),
-                          Padding(
-                            padding: EdgeInsets.only(
-                              left: 100,
-                              top: 10,
-                            ),
-                            child: Text('150',
-                                style: TextStyle(
-                                    fontSize: 13,
-                                    fontFamily: font,
-                                    color: Colors.red)),
-                          ),
-                        ],
-                      ),
-                      const Divider(
-                        thickness: 1,
-                        endIndent: 10,
-                        indent: 10,
-                      ),
-                      const Padding(
-                        padding: EdgeInsets.only(right: 160, top: 3),
-                        child: Text(
-                            'Battle Id :' " " + 'FA12345X198756AV1',
-                            style: TextStyle(
-                                fontSize: 12,
-                                fontFamily: font,
-                                color: Colors.grey)),
-                      ),
-                      const Padding(
-                        padding: EdgeInsets.only(right: 211, top: 5),
-                        child: Text('15 July,2022,' + '10:30 am',
-                            style: TextStyle(
-                                fontSize: 11,
-                                fontFamily: font,
-                                color: Colors.grey)),
-                      )
-                    ],
-                  ),
+              SizedBox(height: 1,),
+              Text('Closing Bal: ${data.closingBal}',
+                style: TextStyle(
+                  fontFamily: font,
+                  fontSize: 11,
+                  color: textColor4
                 ),
-              ),
-              //
-            ),
+              )
+            ],
           )
         ],
       ),

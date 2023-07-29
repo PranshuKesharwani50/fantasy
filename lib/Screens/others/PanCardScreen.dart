@@ -1,6 +1,10 @@
 
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:intl/intl.dart';
 
 import '../../Extra/AppTheme.dart';
 import '../../Extra/CommonFunctions.dart';
@@ -17,6 +21,8 @@ class PanCardScreen extends StatefulWidget {
 class _PanCardScreenState extends State<PanCardScreen> {
 
   TextEditingController amt = TextEditingController();
+  TextEditingController dob = TextEditingController();
+  File? file;
   
   @override
   Widget build(BuildContext context) {
@@ -81,8 +87,15 @@ class _PanCardScreenState extends State<PanCardScreen> {
               ),
               child: ListView(
                 children: [
-                  InkWell(
-                    child: Container(
+                  InkWell( 
+                    onTap: () {
+                      var data = filePickerDailog(context);
+                      if(data!=null){
+                        file = data;
+                        setState(() { });
+                      }
+                    },
+                    child: file==null ? Container(
                       padding: EdgeInsets.all(20),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.all(
@@ -107,7 +120,7 @@ class _PanCardScreenState extends State<PanCardScreen> {
                           )
                         ],
                       ),
-                    ),
+                    ) : Text('${file!.path}'),
                   ),
                   SizedBox(height: 10,),
                   CustomTextField(
@@ -116,18 +129,18 @@ class _PanCardScreenState extends State<PanCardScreen> {
                     fontSize: 12,
                     radiusSize: 10,
                     paddingSize: EdgeInsets.all(10),
-                    label: 'Amount to add', 
+                    label: 'Name (Same as on PAN Card)', 
                     widget: TextFormField(
                       validator: (data){
                         if(data==null){
-                          return 'Amount to add';
+                          return 'Name (Same as on PAN Card)';
                         }
                         return null;
                       },
                       decoration: InputDecoration(
                         //prefix: Image.asset(coin,height: 20,),
                         border: InputBorder.none,
-                        hintText: 'Amount to add',
+                        hintText: 'Name (Same as on PAN Card)',
                         hintStyle: TextStyle(
                           fontFamily: font
                         )
@@ -142,18 +155,18 @@ class _PanCardScreenState extends State<PanCardScreen> {
                     fontSize: 12,
                     radiusSize: 10,
                     paddingSize: EdgeInsets.all(10),
-                    label: 'Amount to add', 
+                    label: 'PAN Number', 
                     widget: TextFormField(
                       validator: (data){
                         if(data==null){
-                          return 'Amount to add';
+                          return 'PAN Number';
                         }
                         return null;
                       },
                       decoration: InputDecoration(
                         //prefix: Image.asset(coin,height: 20,),
                         border: InputBorder.none,
-                        hintText: 'Amount to add',
+                        hintText: 'PAN Number',
                         hintStyle: TextStyle(
                           fontFamily: font
                         )
@@ -168,18 +181,18 @@ class _PanCardScreenState extends State<PanCardScreen> {
                     fontSize: 12,
                     radiusSize: 10,
                     paddingSize: EdgeInsets.all(10),
-                    label: 'Amount to add', 
+                    label: 'Confirm PAN Number', 
                     widget: TextFormField(
                       validator: (data){
                         if(data==null){
-                          return 'Amount to add';
+                          return 'Confirm PAN Number';
                         }
                         return null;
                       },
                       decoration: InputDecoration(
                         //prefix: Image.asset(coin,height: 20,),
                         border: InputBorder.none,
-                        hintText: 'Amount to add',
+                        hintText: 'Confirm PAN Number',
                         hintStyle: TextStyle(
                           fontFamily: font
                         )
@@ -194,54 +207,40 @@ class _PanCardScreenState extends State<PanCardScreen> {
                     fontSize: 12,
                     radiusSize: 10,
                     paddingSize: EdgeInsets.all(10),
-                    label: 'Amount to add', 
+                    label: 'Date of Birth', 
                     widget: TextFormField(
                       validator: (data){
                         if(data==null){
-                          return 'Amount to add';
+                          return 'Date of Birth';
                         }
                         return null;
                       },
                       decoration: InputDecoration(
+                        suffixIcon: IconButton(
+                          onPressed: (){
+                            DatePicker.showDatePicker(
+                              context,
+                              showTitleActions: true,
+                              minTime: DateTime(1950),
+                              maxTime: DateTime(2100),
+                              onConfirm: (date){
+                                dob.text = DateFormat('dd-MM-yyyy').format(date);
+                              }
+                            );
+                          }, 
+                          icon:Icon(Icons.date_range)
+                        ),
                         //prefix: Image.asset(coin,height: 20,),
                         border: InputBorder.none,
-                        hintText: 'Amount to add',
+                        hintText: 'Date of Birth',
                         hintStyle: TextStyle(
                           fontFamily: font
                         )
                       ),
-                      controller: amt,
+                      controller: dob,
                     )
                   ),
-                  SizedBox(height: 10),
-                  CustomTextField(
-                    font: font,
-                    fontColor: textColor4,
-                    fontSize: 12,
-                    radiusSize: 10,
-                    paddingSize: EdgeInsets.all(10),
-                    label: 'Amount to add', 
-                    widget: TextFormField(
-                      validator: (data){
-                        if(data==null){
-                          return 'Amount to add';
-                        }
-                        return null;
-                      },
-                      decoration: InputDecoration(
-                        //prefix: Image.asset(coin,height: 20,),
-                        border: InputBorder.none,
-                        hintText: 'Amount to add',
-                        hintStyle: TextStyle(
-                          fontFamily: font
-                        )
-                      ),
-                      controller: amt,
-                    )
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
+                  SizedBox(height: 15),
                   InkWell(
                     onTap: (){
                       //Navigator.push(context, MaterialPageRoute(builder: (ctx) => CreateTeam(match: widget.match,)));

@@ -84,6 +84,7 @@ class Transaction{
   String? paymentType;
   String? paymentStatus;
   String? debitCreditStatus;
+  String? closingBalance;
   String? date;
 
   Transaction({
@@ -94,7 +95,8 @@ class Transaction{
     this.paymentType,
     this.debitCreditStatus,
     this.date,
-    this.paymentStatus
+    this.paymentStatus,
+    this.closingBalance
   });
 
   Transaction.fromJson(var json){
@@ -103,8 +105,9 @@ class Transaction{
     paymentMethod = json['payment_mode'];
     transactionId = json['transaction_id'];
     paymentType = json['payment_type'];
-    debitCreditStatus = json['payment_status'];
+    debitCreditStatus = json['debit_credit_status'];
     date = json['date'];
+    closingBalance = json['closing_balance'];
     paymentStatus = json['payment_status'];
   }
 

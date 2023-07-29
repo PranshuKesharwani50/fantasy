@@ -18,7 +18,9 @@ import 'package:playon69/Screens/DrawerScreen/addcashscreen.dart';
 import 'package:playon69/Screens/DrawerScreen/changepassword.dart';
 import 'package:playon69/Screens/DrawerScreen/support.dart';
 import 'package:playon69/Screens/DrawerScreen/withdraw_money.dart';
+import 'package:playon69/Screens/others/RunGame.dart';
 import 'package:playon69/Screens/others/VerifyScreen.dart';
+import 'package:playon69/Screens/others/gameScreen.dart';
 import 'package:playon69/apis/sharedPreference.dart';
 import 'package:playon69/auth/login.dart';
 import 'package:timezone/standalone.dart' as tz;
@@ -27,6 +29,7 @@ import '../Extra/config.dart';
 import '../Models/profileModel.dart';
 import '../Models/walletModel.dart';
 import '../apis/callApi.dart';
+import 'DrawerScreen/Web/GameWebViewScreen.dart';
 import 'DrawerScreen/Web/webviewScreen.dart';
 
 class MenuScreen extends StatefulWidget {
@@ -423,8 +426,7 @@ class _MenuScreenState extends State<MenuScreen> {
               children: [
                 InkWell(
                   onTap: () {
-                    DateTime.now().toUtc();
-                    convertUTCToIST();
+                    Navigator.push(context, MaterialPageRoute(builder: ((context) => GameWebViewScreen(gameType: 1,))));
                   },
                   child: Container(
                     height: height(context, 0.13),
@@ -438,7 +440,9 @@ class _MenuScreenState extends State<MenuScreen> {
                   ),
                 ),
                 InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(builder: ((context) => GameWebViewScreen(gameType: 2,))));
+                  },
                   child: Container(
                     height: height(context, 0.13),
                     width: width(context, 0.28),
@@ -451,7 +455,9 @@ class _MenuScreenState extends State<MenuScreen> {
                   ),
                 ),
                 InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(builder: ((context) => GameWebViewScreen(gameType: 3,))));
+                  },
                   child: Container(
                     height: height(context, 0.13),
                     width: width(context, 0.28),
@@ -488,21 +494,10 @@ class _MenuScreenState extends State<MenuScreen> {
                         )),
                   ),
                 ),
-                // InkWell(
-                //   onTap: (){},
-                //   child: Container(
-                //     //color: Colors.red,
-                //     height: height(context, 0.13),
-                //     width: width(context, 0.28),
-                //     //width: width(context, 0.45),
-                //     child: ClipRRect(
-                //       borderRadius: BorderRadius.circular(10),
-                //       child: Image.asset(rummyGame,fit: BoxFit.fill,)
-                //     ),
-                //   ),
-                // ),
                 InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(builder: ((context) => GameWebViewScreen(gameType: 4,))));
+                  },
                   child: Container(
                     height: height(context, 0.13),
                     //width: width(context, 0.28),

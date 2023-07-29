@@ -47,8 +47,8 @@ class UserModel2{
   String? teamName;
   String? state;
   String? city;
-  String? gender;
-  String? dob;
+  String gender = '';
+  String dob = '';
   String? userId;
   int? gamePlayed;
   int? totalWinnings;
@@ -63,8 +63,8 @@ class UserModel2{
     this.mno,
     this.state,
     this.city,
-    this.gender,
-    this.dob,
+    gender,
+    dob,
     this.teamName,
     this.userName,
     this.userId,
@@ -82,8 +82,8 @@ class UserModel2{
     mno = json['mobile_number'];
     state = json['state'];
     city = json['city'];
-    gender = json['gender'];
-    dob = json['dateOfBirth'];
+    gender = json['gender'].toString();
+    dob = json['dateOfBirth'].toString();
     teamName = json['team_name'];
     userName = json['user_name'];
     userId = json['user_id'];

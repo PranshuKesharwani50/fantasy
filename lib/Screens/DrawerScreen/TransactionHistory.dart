@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:intl/intl.dart';
 import 'package:playon69/Extra/AppTheme.dart';
 import 'package:playon69/Extra/CommonFunctions.dart';
 import 'package:playon69/Extra/assets.dart';
@@ -31,8 +32,7 @@ class _gamehistoryState extends State<transactionhistory> {
 
   getTransactions() async{
     var res = await retrivePref(method: methods.Maps, key: 'currentUser');
-    //res['token']
-    transactionModel = await getTransactionModel1(context, '4112|jnxLaeqCSzKXRstroV5SfnUCkX4RRwwF1UhzPQk5', res['user_data']['user_name']);
+    transactionModel = await getTransactionHistory1(context, res['token'], res['user_data']['user_name']);
     if(transactionModel!.status==true){
       setState(() {
         isLoading = false;
@@ -60,42 +60,27 @@ class _gamehistoryState extends State<transactionhistory> {
         icon:ImageIcon(AssetImage(backicon))),
         titleSpacing: -4,
       ),
-      body: isLoading==false ? Column(
-        children: [
-          Container(
-            color: appBgColor,
-            height: height(context, 0.1),
-          ),
-          Expanded(
-            child: Container(
-              padding: EdgeInsets.only(
-                top: 10,
-                right: 8,
-                left: 8
-              ),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(30),
-                  topRight: Radius.circular(30)
-                ),
-                color: upComingBg
-              ),
-              child: transactionModel!.transactionHistory!.transaction!.length > 0 ? ListView(
-                children: [
-                  for(int x=0; x<transactionModel!.transactionHistory!.transaction!.length; x++)
-                  transactionTile(transactionModel!.transactionHistory!.transaction![x])
-                ],
-              ) : Center(
-                child: Text('No transactions found!',
-                  style: TextStyle(
-                    fontFamily: font,
-                    fontSize: 13
-                  ),
-                ),
-              ),
+      body: isLoading==false ? Container(
+        padding: EdgeInsets.only(
+          top: 10,
+          right: 8,
+          left: 8,
+          bottom: 10
+        ),
+        color: upComingBg,
+        child: transactionModel!.transactionHistory!.transaction!.length > 0 ? ListView(
+          children: [
+            for(int x=0; x<transactionModel!.transactionHistory!.transaction!.length; x++)
+            transactionTile(transactionModel!.transactionHistory!.transaction![x])
+          ],
+        ) : Center(
+          child: Text('No transactions found!',
+            style: TextStyle(
+              fontFamily: font,
+              fontSize: 13
             ),
           ),
-        ],
+        ),
       ) : Center(
         child: CircularProgressIndicator(),
       ),
@@ -104,63 +89,89 @@ class _gamehistoryState extends State<transactionhistory> {
 
   Widget transactionTile(Transaction data){
     return Container(
-      margin: EdgeInsets.all(8),
-      padding: EdgeInsets.all(15),
+      margin: EdgeInsets.all(5),
+      padding: EdgeInsets.all(10),
       decoration: BoxDecoration(
         color: tileBgColor,
         borderRadius: BorderRadius.all(
-          Radius.circular(12)
+          Radius.circular(10)
         )
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('${data.paymentType}',
-                style: TextStyle(
-                  fontFamily: font,
-                  fontSize: 13,
-                  color: textColor2
+              Container(
+                width: width(context, 0.16),
+                child: Text('${data.date!}',
+                  style: TextStyle(
+                    fontFamily: font,
+                    fontSize: 13,
+                    color: textColor4
+                  ),
                 ),
               ),
-              Row(
+              SizedBox(width: 10,),
+              Container(
+                height: 30,
+                decoration: BoxDecoration(
+                  border: Border(
+                    right: BorderSide(
+                      width: 1,
+                      color: borderColor5
+                    )
+                  )
+                ),
+              ),
+              SizedBox(width: 10,),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Image.asset(coin,height: 15,),
-                  SizedBox(width: 3,),
-                  Text('${data.amt}',
+                  Text('${data.paymentType}',
                     style: TextStyle(
                       fontFamily: font,
-                      fontSize: 13,
-                      color: textColor5
+                      fontWeight: FontWeight.bold,
+                      fontSize: 12,
+                      color: textColor2
                     ),
                   ),
+                  SizedBox(height: 3,),
+                  Text('${data.transactionId}',
+                    style: TextStyle(
+                      fontFamily: font,
+                      fontSize: 11,
+                      color: textColor4
+                    ),
+                  )
                 ],
               ),
             ],
           ),
-          Divider(
-            thickness: 1,
-          ),
           Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              Text('Transaction Id: ${data.transactionId}',
-                style: TextStyle(
-                  fontFamily: font,
-                  fontSize: 12,
-                  color: textColor4
-                ),
+              Row(
+                children: [
+                  Image.asset(coin,height: 15,),
+                  Text(' ${data.debitCreditStatus}₹${data.amt!}',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontFamily: font,
+                      fontSize: 13,
+                      color: data.debitCreditStatus=='+' ? textColor3 : textColor5
+                    ),
+                  )
+                ],
               ),
-              SizedBox(height: 5,),
-              Text('${data.date}',
+              SizedBox(height: 1,),
+              Text('Closing Bal: ${data.closingBalance}',
                 style: TextStyle(
                   fontFamily: font,
                   fontSize: 11,
                   color: textColor4
                 ),
-              ),
+              )
             ],
           )
         ],

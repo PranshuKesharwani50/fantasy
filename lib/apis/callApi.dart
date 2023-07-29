@@ -9,6 +9,7 @@ import 'package:playon69/Models/availableTeamModel.dart';
 import 'package:playon69/Models/editTeamDetailsModel.dart';
 import 'package:playon69/Models/leaderBoardModel.dart';
 import 'package:playon69/Models/myTeamModel.dart';
+import 'package:playon69/Models/orderIdModel.dart';
 import 'package:playon69/Models/profileModel.dart';
 import 'package:playon69/Models/transactionistoryModel.dart';
 import 'package:playon69/Providers/CurrentUserProvider.dart';
@@ -23,6 +24,7 @@ import 'package:provider/provider.dart';
 import '../Models/MatchContest.dart';
 import '../Models/MathesModel.dart';
 import '../Models/MyContestModel.dart';
+import '../Models/gameHistoryModel.dart';
 import '../Models/playersModel.dart';
 import '../Models/walletModel.dart';
 import '../Providers/MatchContestProvider.dart';
@@ -31,12 +33,14 @@ import '../Providers/newContestStatusProvider.dart';
 loginUser1(BuildContext context,String mobile,String password,String userType) async{
   var responce = await loginUser(mobile, password, userType);
   if(responce['status']==true){
+    Navigator.of(context).pop();
     LoginResponceModel user = LoginResponceModel.fromJson(responce);
     insertPref(method: methods.String, key: 'currentUser', value: json.encode(responce));
     Provider.of<CurrentUserProvider>(context,listen: false).insert(user);
     Fluttertoast.showToast(msg: '${responce['message']}');
     Navigator.pushReplacement(context, MaterialPageRoute(builder: ((context) => MenuScreen())));
   }else{
+    Navigator.of(context).pop();
     Fluttertoast.showToast(msg: '${responce['message']}');
   }
 }
@@ -118,10 +122,16 @@ getWalletDetails1(BuildContext context, String token,String userId) async{
   return wallet;
 }
 
-getTransactionModel1(BuildContext context, String token,String userId) async{
-  var responce = await getTransactionModel(token,userId,);
-  TransactionHistoryModel wallet = TransactionHistoryModel.fromJson(responce);
-  return wallet;
+getTransactionHistory1(BuildContext context, String token,String userId) async{
+  var responce = await getTransactionHistory(token,userId,);
+  TransactionHistoryModel data = TransactionHistoryModel.fromJson(responce);
+  return data;
+}
+
+getGameHistory1(BuildContext context, String token,String userId) async{
+  var responce = await getGameHistory(token,userId,);
+  GameHistoryModel data = GameHistoryModel.fromJson(responce);
+  return data;
 }
 
 getMyContestHistory1(BuildContext context, String token,String userId,String actionType) async{
@@ -133,5 +143,11 @@ getMyContestHistory1(BuildContext context, String token,String userId,String act
 getProfile1(BuildContext context,String userId) async{
   var responce = await getProfile(userId);
   ProfileModel data = ProfileModel.fromJson(responce);
+  return data;
+}
+
+createCashFreeOrderId1(String token,String amt) async{
+  var responce = await createCashFreeOrderId(token,amt);
+  OrderIdModel data = OrderIdModel.fromJson(responce);
   return data;
 }

@@ -10,7 +10,9 @@ import 'package:playon69/Extra/CommonFunctions.dart';
 import 'package:playon69/Extra/radiusSize.dart';
 import 'package:playon69/apis/apis.dart';
 import 'package:playon69/apis/callApi.dart';
+import 'package:playon69/auth/Newpass.dart';
 import 'package:playon69/auth/OtpScreen.dart';
+import 'package:playon69/auth/createTeam.dart';
 import 'package:playon69/customs/CustomButton.dart';
 import 'package:playon69/customs/CustomTextField.dart';
 import 'package:provider/provider.dart';
@@ -125,7 +127,7 @@ class _LoginWidgetState extends State<LoginWidget> {
         Fluttertoast.showToast(msg: '${responce['message']}');
         Future.delayed(Duration(seconds: 1),(){
           Navigator.of(context).pop();
-          Navigator.push(context, MaterialPageRoute(builder: (ctx)=>OtpVerification(number: mno.text.trim(),token: responce['token'],newAccout: true,)));
+          Navigator.push(context, MaterialPageRoute(builder: (ctx)=>OtpVerification(number: mno.text.trim(),token: responce['token'],newAccout: true,userId: responce['user_data']['user_name'],)));
         });
       }else{
         Navigator.of(context).pop();
@@ -145,6 +147,12 @@ class _LoginWidgetState extends State<LoginWidget> {
     refralCode.clear();
   }
 
+  void cancel(){
+    setState(() {
+      index = 1;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -155,7 +163,7 @@ class _LoginWidgetState extends State<LoginWidget> {
             Radius.circular(textFieldRadius)
           )
         ),
-        child: Column(
+        child: index!=3 ?Column(
           children: [
             Text('Welcome Back!',
               style: TextStyle(
@@ -270,11 +278,31 @@ class _LoginWidgetState extends State<LoginWidget> {
                     controller: password,
                   )
                 ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    TextButton(
+                      onPressed: (){
+                        // Navigator.push(context, MaterialPageRoute(builder: (context)=> ForgetPassScreen()));
+                        setState(() {
+                          index = 3;
+                        });
+                      }, 
+                      child: Text('Forget Password?',
+                        style: TextStyle(
+                          fontFamily: font,
+                          color: textColor5
+                        ),
+                      )
+                    ),
+                  ],
+                ),
                 SizedBox(height: 30,),
                 CustomButton(
                   mainAlignment: MainAxisAlignment.center,
                   widget: Container(),
                   onTap: (){
+                    showLoadingDailog(context, 'Please-wait login-in');
                     logIn();
                   },
                   label: 'Log in',
@@ -438,8 +466,111 @@ class _LoginWidgetState extends State<LoginWidget> {
             )
             //SignUpDailog()
           ],
-        ),
+        ) : 
+        ForgetPass(cancel: cancel,)
       ),
+    );
+  }
+}
+
+class ForgetPass extends StatelessWidget {
+  ForgetPass({
+    this.cancel
+  });
+
+  Function? cancel;
+
+  TextEditingController mno = TextEditingController();
+
+  verify(BuildContext context) async{
+    var res = await ForgetPassVerify(mno.text);
+    if(res['status']==true){
+      Fluttertoast.showToast(msg: 'OTP send to ${mno.text}');
+      Navigator.push(context, MaterialPageRoute(builder: (ctx)=> NewPassword(token: res['token'],mno: mno.text,)));
+    }else{
+      Fluttertoast.showToast(msg: 'Failed to send OTP');
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            InkWell(
+              onTap: (){
+                cancel!();
+              },
+              child: Text('Cancel',
+                style: TextStyle(
+                  fontFamily: font,
+                  color: textColor4
+                ),
+              ),
+            ),
+            SizedBox(width: 5,)
+          ],
+        ),
+        Text('Forget Password!',
+          style: TextStyle(
+            fontSize: 20,
+            fontFamily: font,
+            fontWeight: FontWeight.bold
+          ),
+        ),
+        SizedBox(height: 8,),
+        Text('Enter your mobile number to change your password',
+          style: TextStyle(
+            fontSize: 14,
+            fontFamily: font,
+          ),
+        ),
+        SizedBox(height: 38,),
+        CustomTextField(
+          font: font,
+          fontColor: textColor4,
+          fontSize: 12,
+          radiusSize: 5,
+          paddingSize: EdgeInsets.all(10),
+          label: 'Mobile Number',
+          widget: IntlPhoneField(
+            showCountryFlag: false,
+            //disableLengthCheck: true,
+            showDropdownIcon: false,
+            initialCountryCode: 'IN',
+            decoration: InputDecoration(
+              //contentPadding: EdgeInsets.all(5),
+              border: InputBorder.none,
+              hintText: 'Enter Mobile Number',
+              hintStyle: TextStyle(
+                fontFamily: font
+              )
+            ),
+            controller: mno,
+          )
+        ),
+        SizedBox(height: 30,),
+        CustomButton(
+          mainAlignment: MainAxisAlignment.center,
+          widget: Container(),
+          onTap: (){
+            verify(context);
+          },
+          label: 'Verify',
+          borderWidth: 0,
+          borderColor: borderColor2,
+          borderRadius: 8,
+          padding: EdgeInsets.all(15),
+          fontFamily: font,
+          fontSize: 15,
+          color: buttonBgColor,
+          fontColor: textColor1,
+          width: double.infinity,
+          alignment: Alignment.topCenter,
+        )
+      ],
     );
   }
 }

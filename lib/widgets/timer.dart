@@ -33,28 +33,23 @@ class _TimerWidgetState extends State<TimerWidget> {
     startTime();
   }
 
-  // var provider = Provider.of<LiveWithdrawalProvider>;
-
   var seconds = 0;
 
   void startTime(){
 
-    DateTime dateTime = DateFormat('hh:mm a').parse(widget.startingTime);
+    DateTime dateTime = DateFormat('HH:mm').parse(widget.startingTime);
     DateTime dt2 = DateTime.now();
     Duration ddd = dateTime.difference(dt2);
 
-  // if(ddd.inHours < -468023){
-  //   dur = ddd.inMilliseconds;
-  // }else{
-    dur = ddd.inMilliseconds ~/ 1000;
-  // }
+    // dur = ddd.inMilliseconds ~/ 1000;
+    dur = ddd.inSeconds;
+
     countdownTimer = Timer.periodic(Duration(seconds: 1), (timer) { 
       seconds = dur - 1;
       dur = seconds;
       setState(() {});
     });
   }
-  
 
   @override
   void dispose() {

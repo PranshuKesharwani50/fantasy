@@ -10,11 +10,13 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:playon69/Models/UserModel.dart';
 import 'package:playon69/apis/apis.dart';
 import 'package:playon69/apis/sharedPreference.dart';
+import 'package:playon69/auth/Newpass.dart';
+import 'package:playon69/auth/createTeam.dart';
+import 'package:playon69/auth/login.dart';
 
 import '../Extra/AppTheme.dart';
 import '../Extra/CommonFunctions.dart';
 import '../Extra/assets.dart';
-import '../Screens/MenuScreen.dart';
 import '../customs/CustomButton.dart';
 
 class OtpVerification extends StatefulWidget {
@@ -22,13 +24,15 @@ class OtpVerification extends StatefulWidget {
     required this.newAccout,
     required this.number,
     required this.token,
-    this.user
+    this.user,
+    this.userId
   });
 
   String? number;
   String? token;
   bool? newAccout;
   LoginResponceModel? user;
+  String? userId;
 
   @override
   State<OtpVerification> createState() => _OtpVerificationState();
@@ -66,7 +70,8 @@ class _OtpVerificationState extends State<OtpVerification> {
     if(responce['status']==true){
       Fluttertoast.showToast(msg: '${responce['message']}');
       if(widget.newAccout==true){
-        Navigator.push(context, MaterialPageRoute(builder: ((context) => MenuScreen())));
+        //Navigator.push(context, MaterialPageRoute(builder: ((context) => MenuScreen())));
+          Navigator.push(context, MaterialPageRoute(builder: ((context) => CreateTeamScreen())));
       }else{
         widget.user!.userData!.accountVerified = 1;
         insertPref(method: methods.String, key: 'currentUser', value: json.encode(widget.user));

@@ -207,18 +207,31 @@ getWalletDetails(String token,String userId) async{
   return res;
 }
 
-getTransactionModel(String token,String userId) async{
-  var responce = await http.post(
+getTransactionHistory(String token,String userId) async{
+  var responce = await http.get(
     Uri.parse(baseApiUrl+'transactionHistory'),
     headers: {
       'Content-Type':'application/json',
       'Accept': 'application/json',
       'Authorization':'Bearer $token'
     },
-    body: json.encode({'user_id' : userId,})
   );
   var res = json.decode(responce.body);
-  print(res);
+  print(responce.body);
+  return res;
+}
+
+getGameHistory(String token,String userId) async{
+  var responce = await http.get(
+    Uri.parse(baseApiUrl+'gameHistory'),
+    headers: {
+      'Content-Type':'application/json',
+      'Accept': 'application/json',
+      'Authorization':'Bearer $token'
+    },
+  );
+  var res = json.decode(responce.body);
+  print(responce.body);
   return res;
 }
 
@@ -285,6 +298,27 @@ changePass(String token,String cpass,String npass) async{
   return res;
 }
 
+changePass2(String token,String npass,String mobile,String otp) async{
+  var responce = await http.post(
+    Uri.parse(baseApiUrl+'changePasswordNew'),
+    headers: {
+      'Content-Type':'application/json',
+      'Accept': 'application/json',
+      'Authorization':'Bearer $token'
+    },
+    // headers: header,
+    body: json.encode({
+      "new_password": npass,
+      'otp':otp,
+      'mobile_number': mobile
+    })
+  );
+  print(responce.body);
+  var res = json.decode(responce.body);
+  print(res);
+  return res;
+}
+
 createCashFreeOrderId(String token,String amount) async{
 
     var responce = await http.post(
@@ -334,6 +368,60 @@ resendOtp(String number) async{
     },
     body: json.encode({
       "mobile_number":number
+    })
+  );
+  var res = json.decode(responce.body);
+  print(res);
+  return res;
+
+}
+
+generatePaymentToke({String? cfKey,String? cfSecret,String? orderId,String? amount,String? currency}) async{
+
+  var responce = await http.post(
+    Uri.parse('https://api.cashfree.com/api/v2/cftoken/order'),
+    headers: {
+      'Content-Type':'application/json',
+      'Accept': 'application/json',
+      'x-client-id': cfKey!,
+      'x-client-secret': cfSecret!
+    },
+    body: json.encode({
+      "orderId": orderId,
+      "orderAmount": amount,
+      "orderCurrency": currency
+    })
+  );
+  var res = json.decode(responce.body);
+  print(res);
+  return res;
+
+}
+
+setTeamName(String token,var data) async{
+
+  var responce = await http.post(
+    Uri.parse(baseApiUrl+'setTeamName'),
+    headers: {
+      'Content-Type':'application/json',
+      'Accept': 'application/json',
+      'Authorization':'Bearer $token'
+    },
+    body: json.encode(data)
+  );
+  var res = json.decode(responce.body);
+  print(res);
+  return res;
+
+}
+
+ForgetPassVerify(String mno) async{
+
+  var responce = await http.post(
+    Uri.parse(baseApiUrl+'forgotPassword'),
+    headers: header,
+    body: json.encode({
+      'mobile_number':mno
     })
   );
   var res = json.decode(responce.body);

@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:playon69/Extra/AppTheme.dart';
 import 'package:playon69/Extra/CommonFunctions.dart';
 import 'package:playon69/Extra/assets.dart';
@@ -300,13 +301,15 @@ class _addcashState extends State<addcash> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: InkWell(
         onTap: (){
-          if(index==0){
-            print(userId);
-            Navigator.push(context, MaterialPageRoute(builder: (ctx) => PaymentWebviewScreen(title: 'UPI Payment',endPoint: 'externalUpiPayment?user_id=$userId&amount=${amt.text}',)));
+          if(double.parse(amt.text)>0.0){
+            if(index==0){
+              Navigator.push(context, MaterialPageRoute(builder: (ctx) => PaymentWebviewScreen(title: 'UPI Payment',endPoint: 'externalUpiPayment?user_id=$userId&amount=${amt.text}',)));
+            }else{
+              Navigator.push(context, MaterialPageRoute(builder: (ctx) => PaymentMethod(amt: amt.text,)));
+            }
           }else{
-            //Navigator.push(context, MaterialPageRoute(builder: (ctx) => PaymentMethod()));
+            Fluttertoast.showToast(msg: 'Please enter amount');
           }
-          //Navigator.push(context, MaterialPageRoute(builder: (ctx) => CreateTeam(match: widget.match,)));
         },
         child: Container(
           height: height(context, 0.06),

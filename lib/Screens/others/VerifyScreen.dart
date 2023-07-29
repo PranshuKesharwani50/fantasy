@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:playon69/Models/UserModel.dart';
 import 'package:playon69/Screens/others/BankDetailScreen.dart';
+import 'package:playon69/Screens/others/PanCardScreen.dart';
 import 'package:playon69/apis/sharedPreference.dart';
 import 'package:playon69/auth/OtpScreen.dart';
 
@@ -124,7 +125,7 @@ class _VerifyScreenState extends State<VerifyScreen> {
                         ),
                         InkWell(
                           onTap: user!.userData!.accountVerified==0 ? (){
-                            Navigator.push(context, MaterialPageRoute(builder: (context)=> OtpVerification(token: user!.token,number: user!.userData!.mno,newAccout: false,user: user)));
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=> OtpVerification(token: user!.token,number: user!.userData!.mno,newAccout: false,user: user,)));
                           } : null,
                           child: user!.userData!.accountVerified==0 ? Container(
                             padding: EdgeInsets.all(8),
@@ -188,7 +189,9 @@ class _VerifyScreenState extends State<VerifyScreen> {
                           ],
                         ),
                         InkWell(
-                          onTap: (){},
+                          onTap: (){
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=> PanCardScreen()));
+                          },
                           child: Container(
                             padding: EdgeInsets.all(8),
                             decoration: BoxDecoration(
