@@ -32,7 +32,7 @@ class _GameWebViewScreenState extends State<GameWebViewScreen> {
 
   @override
   void initState() {
-    SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.bottom]);
+    //SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.bottom]);
     getUser();
     super.initState();
   }
